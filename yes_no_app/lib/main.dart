@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:yes_no_app/config/themes/app_theme.dart';
 
-void main() {
-  runApp(const MainApp());
-}
+void main() => runApp(const MyApp());
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme(selectedColor: 8).theme(),
+      title: 'Material App',
       home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Material App Bar'),
+        ),
         body: Center(
-          child: Text('Hello World!'),
+          child: FilledButton.tonal(
+              onPressed: () {}, child: const Text('Click me')),
         ),
       ),
     );
