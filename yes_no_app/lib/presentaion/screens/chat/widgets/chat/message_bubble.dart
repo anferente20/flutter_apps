@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:yes_no_app/domain/entities/message.dart';
 
 class MessageBubble extends StatelessWidget {
   final bool isLeftMessage;
+  final Message message;
+  final String? image;
 
-  const MessageBubble({this.isLeftMessage = false, super.key});
+  const MessageBubble({required this.message, this.image, this.isLeftMessage = false, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,21 +20,22 @@ class MessageBubble extends StatelessWidget {
           decoration: BoxDecoration(
               color: isLeftMessage ? colors.secondary : colors.primary,
               borderRadius: BorderRadius.circular(20)),
-          child: const Text(
-            'Id reprehenderit qui ',
-            style: TextStyle(color: Colors.white),
+          child: Text(
+            message.text,
+            style: const TextStyle(color: Colors.white),
           ),
         ),
         SizedBox(height: isLeftMessage ? 5 : 10),
-        Visibility(visible: isLeftMessage, child: _ImageBubble()),
-        Visibility(visible: isLeftMessage, child: SizedBox(height: 10)),
+        Visibility(visible: isLeftMessage, child: _ImageBubble(image: image)),
+        Visibility(visible: isLeftMessage, child: const SizedBox(height: 10)),
       ],
     );
   }
 }
 
 class _ImageBubble extends StatelessWidget {
-  const _ImageBubble();
+  final String? image;
+  const _ImageBubble({required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +44,7 @@ class _ImageBubble extends StatelessWidget {
     return ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: Image.network(
-          'https://yesno.wtf/assets/yes/10-271c872c91cd72c1e38e72d2f8eda676.gif',
+          image!,
           width: size.width * 0.7,
           height: 150,
           fit: BoxFit.cover,
