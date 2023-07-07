@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yes_no_app/presentaion/screens/chat/widgets/chat/message_bubble.dart';
+import 'package:yes_no_app/presentaion/screens/chat/widgets/shared/message_field_box.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
@@ -28,7 +29,7 @@ class _ChatView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           children: [
             Expanded(
@@ -40,7 +41,7 @@ class _ChatView extends StatelessWidget {
                 );
               },
             )),
-            Container(color: Colors.greenAccent)
+            MessageFieldBox()
           ],
         ),
       ),
