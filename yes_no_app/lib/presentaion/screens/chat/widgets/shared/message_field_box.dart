@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 class MessageFieldBox extends StatelessWidget {
@@ -21,7 +19,7 @@ class MessageFieldBox extends StatelessWidget {
             enabledBorder: outlineDecoration,
             focusedBorder: outlineDecoration,
             filled: true,
-            hintText: "End your message with a ??",
+            hintText: "End your message with a ?",
             suffixIcon: IconButton(
               icon: const Icon(Icons.send_rounded),
               onPressed: () {
