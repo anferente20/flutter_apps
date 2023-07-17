@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Flutter + Material3'),
       ),
-      body: HomeView(),
+      body: const HomeView(),
     );
   }
 }
@@ -23,13 +23,18 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const menuItems = AppMenuItems;
+    const menuItems = appMenuItems;
 
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
       itemCount: menuItems.length,
       itemBuilder: (context, index) {
-        return CustomListTile(menuItem: menuItems[index]);
+        return CustomListTile(
+          menuItem: menuItems[index],
+          onTap: () {
+            Navigator.of(context).pushNamed(menuItems[index].link);
+          },
+        );
       },
     );
   }
