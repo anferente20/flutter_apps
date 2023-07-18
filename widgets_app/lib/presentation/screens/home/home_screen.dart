@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:widgets_app/config/menu/menu_item.dart';
 import 'package:widgets_app/presentation/widgets/texts/custom_list_tile.dart';
 
@@ -32,7 +33,7 @@ class HomeView extends StatelessWidget {
         return CustomListTile(
           menuItem: menuItems[index],
           onTap: () {
-            Navigator.of(context).pushNamed(menuItems[index].link);
+            context.push(menuItems[index].link);
           },
         );
       },
