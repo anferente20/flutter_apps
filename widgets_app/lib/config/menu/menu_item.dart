@@ -31,11 +31,11 @@ const List<MenuItem> appMenuItems = <MenuItem>[
       subtitle: 'Mensajes en pantalla.',
       link: '/snackbar',
       icon: Icons.info_outline_rounded),
-  // MenuItem(
-  //     title: 'Tarjetas',
-  //     subtitle: 'Variass tarjetas de Flutter.',
-  //     link: '/cards',
-  //     icon: Icons.credit_card_outlined),
+  MenuItem(
+      title: 'Animaciones',
+      subtitle: 'Statefull Widget animado.',
+      link: '/animated',
+      icon: Icons.check_box_outline_blank_outlined),
   // MenuItem(
   //     title: 'Tarjetas',
   //     subtitle: 'Variass tarjetas de Flutter.',
