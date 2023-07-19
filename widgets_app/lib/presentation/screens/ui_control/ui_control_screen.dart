@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:widgets_app/config/constants/enums.dart';
+import 'package:go_router/go_router.dart';
+import 'package:widgets_app/config/utils/enums/enums.dart';
 import 'package:widgets_app/presentation/widgets/tiles/custom_expansion_tile.dart';
 
 class UIControlScreen extends StatelessWidget {
@@ -13,7 +14,9 @@ class UIControlScreen extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.arrow_back_ios_new_rounded),
-          onPressed: () {},
+          onPressed: () {
+            context.pop();
+          },
         ),
         body: const UIControlsView());
   }
