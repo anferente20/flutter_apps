@@ -36,11 +36,11 @@ const List<MenuItem> appMenuItems = <MenuItem>[
       subtitle: 'Statefull Widget animado.',
       link: '/animated',
       icon: Icons.check_box_outline_blank_outlined),
-  // MenuItem(
-  //     title: 'Tarjetas',
-  //     subtitle: 'Variass tarjetas de Flutter.',
-  //     link: '/cards',
-  //     icon: Icons.credit_card_outlined),
+  MenuItem(
+      title: 'UI Controls',
+      subtitle: 'Controles de flutter.',
+      link: '/ui-control',
+      icon: Icons.car_rental_outlined),
   // MenuItem(
   //     title: 'Tarjetas',
   //     subtitle: 'Variass tarjetas de Flutter.',
