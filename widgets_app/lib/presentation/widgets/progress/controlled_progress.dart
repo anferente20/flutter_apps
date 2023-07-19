@@ -10,7 +10,7 @@ class ControlledProgress extends StatelessWidget {
           return (value * 2) / 100;
         }).takeWhile((value) => value < 100),
         builder: (context, snapshot) {
-          final double progressValue = snapshot.data as double;
+          final progressValue = snapshot.data ?? 0;
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
@@ -19,12 +19,12 @@ class ControlledProgress extends StatelessWidget {
                 CircularProgressIndicator(
                   strokeWidth: 2,
                   backgroundColor: Colors.black38,
-                  value: progressValue,
+                  value: double.parse(progressValue.toString()),
                 ),
                 const SizedBox(width: 20),
                 Expanded(
                     child: LinearProgressIndicator(
-                  value: progressValue,
+                  value: double.parse(progressValue.toString()),
                 ))
               ],
             ),

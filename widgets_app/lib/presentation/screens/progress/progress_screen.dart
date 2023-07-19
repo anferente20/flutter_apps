@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:widgets_app/presentation/widgets/progress/controlled_progress.dart';
 
 class ProgressScreen extends StatelessWidget {
@@ -9,6 +10,12 @@ class ProgressScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Progress Indicators'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.arrow_back_ios_new_rounded),
+        onPressed: () {
+          context.pop();
+        },
       ),
       body: const ProgressView(),
     );
@@ -22,7 +29,6 @@ class ProgressView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
     return const Center(
       child: Column(children: [
         SizedBox(
