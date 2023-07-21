@@ -46,9 +46,9 @@ const List<MenuItem> appMenuItems = <MenuItem>[
       subtitle: '¿Ya sabes cómo usar nuestra app?.',
       link: '/app-tutorial',
       icon: Icons.abc_outlined),
-  // MenuItem(
-  //     title: 'Tarjetas',
-  //     subtitle: 'Variass tarjetas de Flutter.',
-  //     link: '/cards',
-  //     icon: Icons.credit_card_outlined),
+  MenuItem(
+      title: 'Infinite Scroll',
+      subtitle: 'Imágenes variadas.',
+      link: '/infinite',
+      icon: Icons.list_alt_rounded),
 ];
