@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:widgets_app/config/menu/menu_item.dart';
+import 'package:widgets_app/presentation/widgets/drawers/side_menu.dart';
 import 'package:widgets_app/presentation/widgets/texts/custom_list_tile.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -8,11 +9,15 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sccafoldKey = GlobalKey<ScaffoldState>();
+
     return Scaffold(
+      key: sccafoldKey,
       appBar: AppBar(
         title: const Text('Flutter + Material3'),
       ),
       body: const HomeView(),
+      drawer: SideMenu(menuOptions: appMenuItems, scaffoldKey: sccafoldKey),
     );
   }
 }

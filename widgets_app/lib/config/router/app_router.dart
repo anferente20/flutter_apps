@@ -12,4 +12,6 @@ final appRouter = GoRouter(initialLocation: '/', routes: [
   GoRoute(path: '/progress', builder: (context, state) => const ProgressScreen()),
   GoRoute(path: '/snackbar', builder: (context, state) => const SnackbarScreen()),
   GoRoute(path: '/ui-control', builder: (context, state) => const UIControlScreen()),
+  GoRoute(path: '/counter', builder: (context, state) => const CounterScreeen()),
+  GoRoute(path: '/theme-selector', builder: (context, state) => const ThemeSelectorScreen()),
 ]);
