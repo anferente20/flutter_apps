@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({super.key});
@@ -8,22 +9,22 @@ class CustomBottomNavigationBar extends StatelessWidget {
     return BottomNavigationBar(
       elevation: 0,
       type: BottomNavigationBarType.fixed,
-      items: const [
+      items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home_max),
-          label: 'Inicio',
+          icon: const Icon(Icons.home_max),
+          label: AppLocalizations.of(context)!.home,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.label_outlined),
-          label: 'Categorías',
+          icon: const Icon(Icons.label_outlined),
+          label: AppLocalizations.of(context)!.categories,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.favorite_outline),
-          label: 'Favoritos',
+          icon: const Icon(Icons.favorite_outline),
+          label: AppLocalizations.of(context)!.favorites,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.settings),
-          label: 'Configuración',
+          icon: const Icon(Icons.settings),
+          label: AppLocalizations.of(context)!.settings,
         )
       ],
     );

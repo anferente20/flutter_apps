@@ -3,38 +3,67 @@ import 'package:cinemapp/config/helpers/human_formats.dart';
 import 'package:cinemapp/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
 
-class MoviHorizontalListview extends StatelessWidget {
+class MoviHorizontalListview extends StatefulWidget {
   final List<Movie> movies;
   final String? title;
   final String? subtitle;
   final VoidCallback? loadNextPage;
+  final bool showRate;
 
   const MoviHorizontalListview({
     required this.movies,
     this.title,
     this.subtitle,
     this.loadNextPage,
+    this.showRate = true,
     super.key,
   });
+
+  @override
+  State<MoviHorizontalListview> createState() => _MoviHorizontalListviewState();
+}
+
+class _MoviHorizontalListviewState extends State<MoviHorizontalListview> {
+  final scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(() {
+      if (widget.loadNextPage == null) return;
+      if (scrollController.position.pixels + 200 >=
+          scrollController.position.maxScrollExtent) {
+        widget.loadNextPage!();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 350,
       child: Column(children: [
-        if (title != null || subtitle != null)
+        if (widget.title != null || widget.subtitle != null)
           _Title(
-            title: title,
-            subtitle: subtitle,
+            title: widget.title,
+            subtitle: widget.subtitle,
           ),
         Expanded(
             child: ListView.builder(
-          itemCount: movies.length,
+          controller: scrollController,
+          itemCount: widget.movies.length,
           scrollDirection: Axis.horizontal,
           physics: const BouncingScrollPhysics(),
           itemBuilder: (context, index) {
             return _SlideMovie(
-              movie: movies[index],
+              movie: widget.movies[index],
+              showRate: widget.showRate,
             );
           },
         )),
@@ -45,10 +74,9 @@ class MoviHorizontalListview extends StatelessWidget {
 
 class _SlideMovie extends StatelessWidget {
   final Movie movie;
+  final bool showRate;
 
-  const _SlideMovie({
-    required this.movie,
-  });
+  const _SlideMovie({required this.movie, this.showRate = false});
 
   @override
   Widget build(BuildContext context) {
@@ -92,28 +120,31 @@ class _SlideMovie extends StatelessWidget {
             ),
           ),
           //* rated
-          Row(
-            children: [
-              Icon(
-                Icons.star_half_outlined,
-                color: Colors.yellow.shade800,
-              ),
-              const SizedBox(
-                width: 3,
-              ),
-              Text(
-                '${movie.voteAverage}',
-                style: textStyles.bodyMedium!
-                    .copyWith(color: Colors.yellow.shade900),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Text(
-                HumanFormats.number(movie.popularity),
-                style: textStyles.bodySmall,
-              )
-            ],
+          Visibility(
+            visible: showRate,
+            child: Row(
+              children: [
+                Icon(
+                  Icons.star_half_outlined,
+                  color: Colors.yellow.shade800,
+                ),
+                const SizedBox(
+                  width: 3,
+                ),
+                Text(
+                  '${movie.voteAverage}',
+                  style: textStyles.bodyMedium!
+                      .copyWith(color: Colors.yellow.shade900),
+                ),
+                const SizedBox(
+                  width: 30,
+                ),
+                Text(
+                  HumanFormats.number(movie.popularity),
+                  style: textStyles.bodySmall,
+                )
+              ],
+            ),
           )
         ],
       ),
