@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cinemapp/config/helpers/human_formats.dart';
 import 'package:cinemapp/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MoviHorizontalListview extends StatefulWidget {
   final List<Movie> movies;
@@ -61,10 +62,13 @@ class _MoviHorizontalListviewState extends State<MoviHorizontalListview> {
           scrollDirection: Axis.horizontal,
           physics: const BouncingScrollPhysics(),
           itemBuilder: (context, index) {
-            return FadeInRight(
-              child: _SlideMovie(
-                movie: widget.movies[index],
-                showRate: widget.showRate,
+            return GestureDetector(
+              onTap: () => context.push('/movie/${widget.movies[index].id}'),
+              child: FadeInRight(
+                child: _SlideMovie(
+                  movie: widget.movies[index],
+                  showRate: widget.showRate,
+                ),
               ),
             );
           },
