@@ -39,65 +39,62 @@ class _HomeViewState extends ConsumerState<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    if (ref.watch(initialLoadingProvider)) return const FullscreenLoader();
+
+    final slideshowMovies = ref.watch(moviesSlideshowProvider);
+
     final lastMoviesMovies = ref.watch(lastMoviesMoviesProvider);
     final popularMovies = ref.watch(popularMoviesProvider);
     final bestRatedMovies = ref.watch(bestRatedMoviesProvider);
     final upcomingMovies = ref.watch(upcomingMoviesProvider);
-    final slideshowMovies = ref.watch(moviesSlideshowProvider);
 
     DateTime now = DateTime.now();
     String locale = Localizations.localeOf(context).languageCode;
 
-    return lastMoviesMovies.isEmpty
-        ? const Center(child: CircularProgressIndicator())
-        : CustomScrollView(
-            slivers: [
-              const SliverAppBar(
-                floating: true,
-                flexibleSpace: CustomAppbar(),
+    return CustomScrollView(
+      slivers: [
+        const SliverAppBar(
+          floating: true,
+          flexibleSpace: CustomAppbar(),
+        ),
+        SliverList(
+            delegate: SliverChildBuilderDelegate((context, index) {
+          return Column(
+            children: [
+              MoviesSlideshow(movies: slideshowMovies),
+              MoviHorizontalListview(
+                movies: lastMoviesMovies,
+                title: AppLocalizations.of(context)!.lastMovies,
+                subtitle: '${DateFormat('EEEE d', locale).format(now)} ',
+                loadNextPage: () =>
+                    ref.read(lastMoviesMoviesProvider.notifier).loadNextPage(),
               ),
-              SliverList(
-                  delegate: SliverChildBuilderDelegate((context, index) {
-                return Column(
-                  children: [
-                    MoviesSlideshow(movies: slideshowMovies),
-                    MoviHorizontalListview(
-                      movies: lastMoviesMovies,
-                      title: AppLocalizations.of(context)!.lastMovies,
-                      subtitle: '${DateFormat('EEEE d', locale).format(now)} ',
-                      loadNextPage: () => ref
-                          .read(lastMoviesMoviesProvider.notifier)
-                          .loadNextPage(),
-                    ),
-                    MoviHorizontalListview(
-                      movies: upcomingMovies,
-                      title: AppLocalizations.of(context)!.upcoming,
-                      loadNextPage: () => ref
-                          .read(upcomingMoviesProvider.notifier)
-                          .loadNextPage(),
-                      showRate: false,
-                    ),
-                    MoviHorizontalListview(
-                      movies: popularMovies,
-                      title: AppLocalizations.of(context)!.popular,
-                      loadNextPage: () => ref
-                          .read(popularMoviesProvider.notifier)
-                          .loadNextPage(),
-                    ),
-                    MoviHorizontalListview(
-                      movies: bestRatedMovies,
-                      title: AppLocalizations.of(context)!.bestRated,
-                      loadNextPage: () => ref
-                          .read(bestRatedMoviesProvider.notifier)
-                          .loadNextPage(),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    )
-                  ],
-                );
-              }, childCount: 1))
+              MoviHorizontalListview(
+                movies: upcomingMovies,
+                title: AppLocalizations.of(context)!.upcoming,
+                loadNextPage: () =>
+                    ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
+                showRate: false,
+              ),
+              MoviHorizontalListview(
+                movies: popularMovies,
+                title: AppLocalizations.of(context)!.popular,
+                loadNextPage: () =>
+                    ref.read(popularMoviesProvider.notifier).loadNextPage(),
+              ),
+              MoviHorizontalListview(
+                movies: bestRatedMovies,
+                title: AppLocalizations.of(context)!.bestRated,
+                loadNextPage: () =>
+                    ref.read(bestRatedMoviesProvider.notifier).loadNextPage(),
+              ),
+              const SizedBox(
+                height: 20,
+              )
             ],
           );
+        }, childCount: 1))
+      ],
+    );
   }
 }
