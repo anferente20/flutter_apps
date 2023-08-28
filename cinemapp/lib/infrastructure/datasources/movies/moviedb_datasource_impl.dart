@@ -2,8 +2,8 @@ import 'package:cinemapp/config/constants/environment.dart';
 import 'package:cinemapp/domain/datasources/movies/movies_datasource.dart';
 import 'package:cinemapp/domain/entities/movie.dart';
 import 'package:cinemapp/infrastructure/mappers/movie_mapper.dart';
-import 'package:cinemapp/infrastructure/models/moviedb/movie_details.dart';
-import 'package:cinemapp/infrastructure/models/moviedb/moviedb_response.dart';
+import 'package:cinemapp/infrastructure/models/moviedb/movies/movie_details.dart';
+import 'package:cinemapp/infrastructure/models/moviedb/movies/moviedb_response.dart';
 import 'package:dio/dio.dart';
 
 class MoviedbDatasourceImpl extends MoviesDatasource {

@@ -1,7 +1,7 @@
 import 'package:cinemapp/config/constants/images.dart';
 import 'package:cinemapp/domain/entities/movie.dart';
-import 'package:cinemapp/infrastructure/models/moviedb/movie_details.dart';
-import 'package:cinemapp/infrastructure/models/moviedb/movie_movidb.dart';
+import 'package:cinemapp/infrastructure/models/moviedb/movies/movie_details.dart';
+import 'package:cinemapp/infrastructure/models/moviedb/movies/movie_movidb.dart';
 
 class MovieMapper {
   static Movie movieDBtoEntity(MovieMovieDB movieDB) => Movie(
