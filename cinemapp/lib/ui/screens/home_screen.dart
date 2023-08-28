@@ -35,6 +35,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
     ref.read(popularMoviesProvider.notifier).loadNextPage();
     ref.read(bestRatedMoviesProvider.notifier).loadNextPage();
     ref.read(upcomingMoviesProvider.notifier).loadNextPage();
+    ref.read(tvShowsProvider.notifier).loadNextPage();
   }
 
   @override
@@ -47,6 +48,8 @@ class _HomeViewState extends ConsumerState<HomeView> {
     final popularMovies = ref.watch(popularMoviesProvider);
     final bestRatedMovies = ref.watch(bestRatedMoviesProvider);
     final upcomingMovies = ref.watch(upcomingMoviesProvider);
+
+    final tvShows = ref.watch(tvShowsProvider);
 
     DateTime now = DateTime.now();
     String locale = Localizations.localeOf(context).languageCode;
@@ -70,11 +73,10 @@ class _HomeViewState extends ConsumerState<HomeView> {
                     ref.read(lastMoviesMoviesProvider.notifier).loadNextPage(),
               ),
               MoviHorizontalListview(
-                movies: upcomingMovies,
-                title: AppLocalizations.of(context)!.upcoming,
+                movies: bestRatedMovies,
+                title: AppLocalizations.of(context)!.bestRated,
                 loadNextPage: () =>
-                    ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
-                showRate: false,
+                    ref.read(bestRatedMoviesProvider.notifier).loadNextPage(),
               ),
               MoviHorizontalListview(
                 movies: popularMovies,
@@ -83,10 +85,19 @@ class _HomeViewState extends ConsumerState<HomeView> {
                     ref.read(popularMoviesProvider.notifier).loadNextPage(),
               ),
               MoviHorizontalListview(
-                movies: bestRatedMovies,
-                title: AppLocalizations.of(context)!.bestRated,
+                movies: tvShows,
+                isMovie: false,
+                showViews: false,
+                title: AppLocalizations.of(context)!.tvShows,
                 loadNextPage: () =>
-                    ref.read(bestRatedMoviesProvider.notifier).loadNextPage(),
+                    ref.read(tvShowsProvider.notifier).loadNextPage(),
+              ),
+              MoviHorizontalListview(
+                movies: upcomingMovies,
+                title: AppLocalizations.of(context)!.upcoming,
+                loadNextPage: () =>
+                    ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
+                showRate: false,
               ),
               const SizedBox(
                 height: 20,

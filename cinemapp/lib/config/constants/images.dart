@@ -4,4 +4,7 @@ class Images {
 
   static const profileNotFound =
       'https://1fid.com/wp-content/uploads/2022/06/no-profile-picture-6-1024x1024.jpg';
+
+  static const logoNotFound =
+      'https://cdn-icons-png.flaticon.com/128/2748/2748558.png';
 }

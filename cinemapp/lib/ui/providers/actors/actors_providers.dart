@@ -1,11 +1,19 @@
-import 'package:cinemapp/domain/entities/actors.dart';
+import 'package:cinemapp/domain/entities/actor.dart';
 import 'package:cinemapp/ui/providers/actors/actors_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //* actors by movie
-final getActorsProvider =
+final getActorsByMovieProvider =
     StateNotifierProvider<ActorsNotifier, Map<int, List<Actor>>>((ref) {
   final fetchActors = ref.watch(actorRepositoryProvider).getActorsByMovie;
+
+  return ActorsNotifier(fetchActors: fetchActors);
+});
+
+//* actors by tv show
+final getActorsByTvShowProvider =
+    StateNotifierProvider<ActorsNotifier, Map<int, List<Actor>>>((ref) {
+  final fetchActors = ref.watch(actorRepositoryProvider).getActorsByTvShow;
 
   return ActorsNotifier(fetchActors: fetchActors);
 });

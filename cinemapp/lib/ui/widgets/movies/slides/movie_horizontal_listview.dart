@@ -10,6 +10,8 @@ class MoviHorizontalListview extends StatefulWidget {
   final String? subtitle;
   final VoidCallback? loadNextPage;
   final bool showRate;
+  final bool showViews;
+  final bool isMovie;
 
   const MoviHorizontalListview({
     required this.movies,
@@ -17,6 +19,8 @@ class MoviHorizontalListview extends StatefulWidget {
     this.subtitle,
     this.loadNextPage,
     this.showRate = true,
+    this.showViews = true,
+    this.isMovie = true,
     super.key,
   });
 
@@ -63,11 +67,18 @@ class _MoviHorizontalListviewState extends State<MoviHorizontalListview> {
           physics: const BouncingScrollPhysics(),
           itemBuilder: (context, index) {
             return GestureDetector(
-              onTap: () => context.push('/movie/${widget.movies[index].id}'),
+              onTap: () {
+                if (widget.isMovie) {
+                  context.push('/movie/${widget.movies[index].id}');
+                } else {
+                  context.push('/tv-show/${widget.movies[index].id}');
+                }
+              },
               child: FadeInRight(
                 child: _SlideMovie(
                   movie: widget.movies[index],
                   showRate: widget.showRate,
+                  showViews: widget.showViews,
                 ),
               ),
             );
@@ -81,8 +92,13 @@ class _MoviHorizontalListviewState extends State<MoviHorizontalListview> {
 class _SlideMovie extends StatelessWidget {
   final Movie movie;
   final bool showRate;
+  final bool showViews;
 
-  const _SlideMovie({required this.movie, this.showRate = false});
+  const _SlideMovie({
+    required this.movie,
+    this.showRate = false,
+    this.showViews = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -145,9 +161,12 @@ class _SlideMovie extends StatelessWidget {
                 const SizedBox(
                   width: 30,
                 ),
-                Text(
-                  HumanFormats.number(movie.popularity),
-                  style: textStyles.bodySmall,
+                Visibility(
+                  visible: showViews,
+                  child: Text(
+                    HumanFormats.number(movie.popularity),
+                    style: textStyles.bodySmall,
+                  ),
                 )
               ],
             ),

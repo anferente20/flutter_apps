@@ -3,8 +3,11 @@
     "categories": "Categories",
     "favorites": "Favorites",
     "settings": "Settings",
-    "lastMovies": "Last Movies",
+    "lastMovies": "Last movies",
     "upcoming": "Upcoming",
     "popular": "Popular",
-    "bestRated": "Best Rated"
+    "bestRated": "Best rated",
+    "tvShows": "TV Shows",
+    "whereToWatch": "Where to watch",
+    "actors": "Actors"
 }

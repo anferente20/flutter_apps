@@ -1,5 +1,5 @@
 import 'package:cinemapp/config/constants/images.dart';
-import 'package:cinemapp/domain/entities/actors.dart';
+import 'package:cinemapp/domain/entities/actor.dart';
 import 'package:cinemapp/infrastructure/models/moviedb/actors/credits_response.dart';
 
 class ActorMapper {

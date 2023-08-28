@@ -6,5 +6,8 @@
     "lastMovies": "Recientes",
     "upcoming": "Próximamente",
     "popular": "Populares",
-    "bestRated": "Mejor calificadas"
+    "bestRated": "Mejor calificadas",
+    "tvShows": "Series",
+    "whereToWatch": "¿Dónde la puedo ver?",
+    "actors": "Actores"
 }

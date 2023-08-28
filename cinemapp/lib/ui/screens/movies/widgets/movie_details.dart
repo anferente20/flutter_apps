@@ -1,11 +1,13 @@
 import 'package:cinemapp/domain/entities/movie.dart';
-import 'package:cinemapp/ui/screens/movies/movie_screen/widgets/actors_by_movie.dart';
+import 'package:cinemapp/ui/screens/movies/widgets/actors_by_movie.dart';
+import 'package:cinemapp/ui/screens/movies/widgets/streaming_providers_by_movie.dart';
 import 'package:flutter/material.dart';
 
 class MovieDetails extends StatelessWidget {
-  const MovieDetails({super.key, required this.movie});
+  const MovieDetails({super.key, required this.movie, this.isMovie = true});
 
   final Movie movie;
+  final bool isMovie;
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +70,17 @@ class MovieDetails extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        ActorsByMovie(movieID: movie.id)
+        ActorsByMovie(
+          movieID: movie.id,
+          isMovie: isMovie,
+        ),
+        StreamingProvidersByMovie(
+          movieID: movie.id,
+          isMovie: isMovie,
+        ),
+        const SizedBox(
+          height: 10,
+        ),
       ],
     );
   }

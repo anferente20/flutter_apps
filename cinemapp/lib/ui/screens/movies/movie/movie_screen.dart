@@ -1,8 +1,8 @@
 import 'package:cinemapp/domain/entities/movie.dart';
 import 'package:cinemapp/ui/providers/movies/movie_info_provider.dart';
 import 'package:cinemapp/ui/providers/providers.dart';
-import 'package:cinemapp/ui/screens/movies/movie_screen/widgets/custom_sliver_appbar.dart';
-import 'package:cinemapp/ui/screens/movies/movie_screen/widgets/movie_details.dart';
+import 'package:cinemapp/ui/screens/movies/widgets/custom_sliver_appbar.dart';
+import 'package:cinemapp/ui/screens/movies/widgets/movie_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -21,7 +21,12 @@ class _MovieScreenState extends ConsumerState<MovieScreen> {
   void initState() {
     super.initState();
     ref.read(movieInfoProvider.notifier).loadMovie(widget.movieID);
-    ref.read(getActorsProvider.notifier).loadActors(int.parse(widget.movieID));
+    ref
+        .read(getActorsByMovieProvider.notifier)
+        .loadActors(int.parse(widget.movieID));
+    ref
+        .read(getStreamingProvidersProvider.notifier)
+        .loadStreamingProviders(int.parse(widget.movieID));
   }
 
   @override
