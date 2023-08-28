@@ -1,4 +1,5 @@
 import 'package:cinemapp/domain/entities/movie.dart';
+import 'package:cinemapp/ui/screens/movies/movie_screen/widgets/actors_by_movie.dart';
 import 'package:flutter/material.dart';
 
 class MovieDetails extends StatelessWidget {
@@ -51,17 +52,23 @@ class MovieDetails extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           child: Wrap(
             children: [
-              ...movie.genreIds.map((genre) => Container(
-                    margin: const EdgeInsets.only(right: 10),
-                    child: Chip(
-                      label: Text(genre),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                    ),
-                  ))
+              ...movie.genreIds.map(
+                (genre) => Container(
+                  margin: const EdgeInsets.only(right: 10),
+                  child: Chip(
+                    label: Text(genre),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                  ),
+                ),
+              )
             ],
           ),
-        )
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        ActorsByMovie(movieID: movie.id)
       ],
     );
   }

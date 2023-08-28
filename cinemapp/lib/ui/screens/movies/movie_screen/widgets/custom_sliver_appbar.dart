@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:cinemapp/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,10 @@ class CustomSliverAppbar extends StatelessWidget {
               child: Image.network(
                 movie.posterPath,
                 fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress != null) return const SizedBox();
+                  return FadeIn(child: child);
+                },
               ),
             ),
             const SizedBox.expand(
@@ -47,11 +52,6 @@ class CustomSliverAppbar extends StatelessWidget {
               ),
             )
           ],
-        ),
-        title: Text(
-          movie.title,
-          style: const TextStyle(fontSize: 20),
-          textAlign: TextAlign.start,
         ),
       ),
     );

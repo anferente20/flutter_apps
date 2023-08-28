@@ -7,12 +7,15 @@ import 'package:cinemapp/infrastructure/models/moviedb/movies/moviedb_response.d
 import 'package:dio/dio.dart';
 
 class MoviedbDatasourceImpl extends MoviesDatasource {
-  final dio = Dio(BaseOptions(
+  final dio = Dio(
+    BaseOptions(
       baseUrl: 'https://api.themoviedb.org/3',
       queryParameters: {
         'api_key': Enviroment.theMovieDBKey,
         'language': 'es-CO'
-      }));
+      },
+    ),
+  );
 
   List<Movie> _jsonToMovies(
       {required Map<String, dynamic> json,

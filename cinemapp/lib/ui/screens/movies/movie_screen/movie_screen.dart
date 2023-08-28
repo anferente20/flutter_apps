@@ -1,5 +1,6 @@
 import 'package:cinemapp/domain/entities/movie.dart';
 import 'package:cinemapp/ui/providers/movies/movie_info_provider.dart';
+import 'package:cinemapp/ui/providers/providers.dart';
 import 'package:cinemapp/ui/screens/movies/movie_screen/widgets/custom_sliver_appbar.dart';
 import 'package:cinemapp/ui/screens/movies/movie_screen/widgets/movie_details.dart';
 import 'package:flutter/material.dart';
@@ -20,12 +21,12 @@ class _MovieScreenState extends ConsumerState<MovieScreen> {
   void initState() {
     super.initState();
     ref.read(movieInfoProvider.notifier).loadMovie(widget.movieID);
+    ref.read(getActorsProvider.notifier).loadActors(int.parse(widget.movieID));
   }
 
   @override
   Widget build(BuildContext context) {
     final Movie? movie = ref.watch(movieInfoProvider)[widget.movieID];
-
     if (movie == null) {
       return const Scaffold(
         body: Center(
@@ -41,8 +42,9 @@ class _MovieScreenState extends ConsumerState<MovieScreen> {
           CustomSliverAppbar(movie: movie),
           SliverList(
             delegate: SliverChildBuilderDelegate(
-                (context, index) => MovieDetails(movie: movie),
-                childCount: 1),
+              (context, index) => MovieDetails(movie: movie),
+              childCount: 1,
+            ),
           )
         ],
       ),
