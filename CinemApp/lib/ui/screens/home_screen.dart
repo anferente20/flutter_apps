@@ -5,8 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-enum DisplayType { movies, tvShow }
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -40,22 +38,21 @@ class _HomeViewState extends ConsumerState<HomeView> {
     ref.read(tvShowsProvider.notifier).loadNextPage();
   }
 
-  Set<DisplayType> segmentedButtonSelection = <DisplayType>{DisplayType.movies};
   @override
   Widget build(BuildContext context) {
     if (ref.watch(initialLoadingProvider)) return const FullscreenLoader();
 
     final slideshowMovies = ref.watch(moviesSlideshowProvider);
-    List<(DisplayType, String)> toggleOptions = [
-      (
-        DisplayType.movies,
-        AppLocalizations.of(context)!.movies,
-      ),
-      (
-        DisplayType.tvShow,
-        AppLocalizations.of(context)!.tvShows,
-      ),
-    ];
+
+    final lastMoviesMovies = ref.watch(lastMoviesMoviesProvider);
+    final popularMovies = ref.watch(popularMoviesProvider);
+    final bestRatedMovies = ref.watch(bestRatedMoviesProvider);
+    final upcomingMovies = ref.watch(upcomingMoviesProvider);
+
+    final tvShows = ref.watch(tvShowsProvider);
+
+    DateTime now = DateTime.now();
+    String locale = Localizations.localeOf(context).languageCode;
 
     return CustomScrollView(
       slivers: [
@@ -68,33 +65,40 @@ class _HomeViewState extends ConsumerState<HomeView> {
           return Column(
             children: [
               MoviesSlideshow(movies: slideshowMovies),
-              const SizedBox(
-                height: 10,
+              MoviHorizontalListview(
+                movies: lastMoviesMovies,
+                title: AppLocalizations.of(context)!.lastMovies,
+                subtitle: '${DateFormat('EEEE d', locale).format(now)} ',
+                loadNextPage: () =>
+                    ref.read(lastMoviesMoviesProvider.notifier).loadNextPage(),
               ),
-              SizedBox(
-                width: 250,
-                height: 35,
-                child: SegmentedButton<DisplayType>(
-                  multiSelectionEnabled: false,
-                  emptySelectionAllowed: false,
-                  showSelectedIcon: false,
-                  selected: segmentedButtonSelection,
-                  onSelectionChanged: (Set<DisplayType> newSelection) {
-                    setState(() {
-                      segmentedButtonSelection = newSelection;
-                    });
-                  },
-                  segments: toggleOptions
-                      .map<ButtonSegment<DisplayType>>(((DisplayType, String) display) {
-                    return ButtonSegment<DisplayType>(
-                        value: display.$1,
-                        label: Text(
-                          display.$2,
-                        ));
-                  }).toList(),
-                ),
+              MoviHorizontalListview(
+                movies: bestRatedMovies,
+                title: AppLocalizations.of(context)!.bestRated,
+                loadNextPage: () =>
+                    ref.read(bestRatedMoviesProvider.notifier).loadNextPage(),
               ),
-              ..._getView(),
+              MoviHorizontalListview(
+                movies: popularMovies,
+                title: AppLocalizations.of(context)!.popular,
+                loadNextPage: () =>
+                    ref.read(popularMoviesProvider.notifier).loadNextPage(),
+              ),
+              MoviHorizontalListview(
+                movies: tvShows,
+                isMovie: false,
+                showViews: false,
+                title: AppLocalizations.of(context)!.tvShows,
+                loadNextPage: () =>
+                    ref.read(tvShowsProvider.notifier).loadNextPage(),
+              ),
+              MoviHorizontalListview(
+                movies: upcomingMovies,
+                title: AppLocalizations.of(context)!.upcoming,
+                loadNextPage: () =>
+                    ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
+                showRate: false,
+              ),
               const SizedBox(
                 height: 20,
               )
@@ -103,62 +107,5 @@ class _HomeViewState extends ConsumerState<HomeView> {
         }, childCount: 1))
       ],
     );
-  }
-
-  List<Widget> _getView() {
-    if (segmentedButtonSelection.first == DisplayType.movies) {
-      return _getMoviesView();
-    } else {
-      return _getTvShows();
-    }
-  }
-
-  List<Widget> _getMoviesView() {
-    final popularMovies = ref.watch(popularMoviesProvider);
-    final bestRatedMovies = ref.watch(bestRatedMoviesProvider);
-    final upcomingMovies = ref.watch(upcomingMoviesProvider);
-    final lastMoviesMovies = ref.watch(lastMoviesMoviesProvider);
-
-    DateTime now = DateTime.now();
-    String locale = Localizations.localeOf(context).languageCode;
-
-    return [
-      MoviHorizontalListview(
-        movies: lastMoviesMovies,
-        title: AppLocalizations.of(context)!.lastMovies,
-        subtitle: '${DateFormat('EEEE d', locale).format(now)} ',
-        loadNextPage: () => ref.read(lastMoviesMoviesProvider.notifier).loadNextPage(),
-      ),
-      MoviHorizontalListview(
-        movies: bestRatedMovies,
-        title: AppLocalizations.of(context)!.bestRated,
-        loadNextPage: () => ref.read(bestRatedMoviesProvider.notifier).loadNextPage(),
-      ),
-      MoviHorizontalListview(
-        movies: popularMovies,
-        title: AppLocalizations.of(context)!.popular,
-        loadNextPage: () => ref.read(popularMoviesProvider.notifier).loadNextPage(),
-      ),
-      MoviHorizontalListview(
-        movies: upcomingMovies,
-        title: AppLocalizations.of(context)!.upcoming,
-        loadNextPage: () => ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
-        showRate: false,
-      ),
-    ];
-  }
-
-  List<Widget> _getTvShows() {
-    final tvShows = ref.watch(tvShowsProvider);
-
-    return [
-      MoviHorizontalListview(
-        movies: tvShows,
-        isMovie: false,
-        showViews: false,
-        title: AppLocalizations.of(context)!.tvShows,
-        loadNextPage: () => ref.read(tvShowsProvider.notifier).loadNextPage(),
-      ),
-    ];
   }
 }
