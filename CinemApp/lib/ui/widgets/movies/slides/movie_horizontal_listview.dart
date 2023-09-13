@@ -1,6 +1,6 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:cinemapp/config/helpers/human_formats.dart';
 import 'package:cinemapp/domain/entities/movie.dart';
+import 'package:cinemapp/ui/widgets/shared/movies/popularity/popularity.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,7 +10,6 @@ class MoviHorizontalListview extends StatefulWidget {
   final String? subtitle;
   final VoidCallback? loadNextPage;
   final bool showRate;
-  final bool showViews;
   final bool isMovie;
 
   const MoviHorizontalListview({
@@ -19,7 +18,6 @@ class MoviHorizontalListview extends StatefulWidget {
     this.subtitle,
     this.loadNextPage,
     this.showRate = true,
-    this.showViews = true,
     this.isMovie = true,
     super.key,
   });
@@ -36,8 +34,7 @@ class _MoviHorizontalListviewState extends State<MoviHorizontalListview> {
     super.initState();
     scrollController.addListener(() {
       if (widget.loadNextPage == null) return;
-      if (scrollController.position.pixels + 200 >=
-          scrollController.position.maxScrollExtent) {
+      if (scrollController.position.pixels + 200 >= scrollController.position.maxScrollExtent) {
         widget.loadNextPage!();
       }
     });
@@ -78,7 +75,6 @@ class _MoviHorizontalListviewState extends State<MoviHorizontalListview> {
                 child: _SlideMovie(
                   movie: widget.movies[index],
                   showRate: widget.showRate,
-                  showViews: widget.showViews,
                 ),
               ),
             );
@@ -92,12 +88,10 @@ class _MoviHorizontalListviewState extends State<MoviHorizontalListview> {
 class _SlideMovie extends StatelessWidget {
   final Movie movie;
   final bool showRate;
-  final bool showViews;
 
   const _SlideMovie({
     required this.movie,
     this.showRate = false,
-    this.showViews = false,
   });
 
   @override
@@ -144,31 +138,8 @@ class _SlideMovie extends StatelessWidget {
           //* rated
           Visibility(
             visible: showRate,
-            child: Row(
-              children: [
-                Icon(
-                  Icons.star_half_outlined,
-                  color: Colors.yellow.shade800,
-                ),
-                const SizedBox(
-                  width: 3,
-                ),
-                Text(
-                  '${movie.voteAverage}',
-                  style: textStyles.bodyMedium!
-                      .copyWith(color: Colors.yellow.shade900),
-                ),
-                const SizedBox(
-                  width: 30,
-                ),
-                Visibility(
-                  visible: showViews,
-                  child: Text(
-                    HumanFormats.number(movie.popularity),
-                    style: textStyles.bodySmall,
-                  ),
-                )
-              ],
+            child: Poipularity(
+              popularity: movie.voteAverage,
             ),
           )
         ],

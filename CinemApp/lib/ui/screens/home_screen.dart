@@ -69,34 +69,28 @@ class _HomeViewState extends ConsumerState<HomeView> {
                 movies: lastMoviesMovies,
                 title: AppLocalizations.of(context)!.lastMovies,
                 subtitle: '${DateFormat('EEEE d', locale).format(now)} ',
-                loadNextPage: () =>
-                    ref.read(lastMoviesMoviesProvider.notifier).loadNextPage(),
+                loadNextPage: () => ref.read(lastMoviesMoviesProvider.notifier).loadNextPage(),
               ),
               MoviHorizontalListview(
                 movies: bestRatedMovies,
                 title: AppLocalizations.of(context)!.bestRated,
-                loadNextPage: () =>
-                    ref.read(bestRatedMoviesProvider.notifier).loadNextPage(),
+                loadNextPage: () => ref.read(bestRatedMoviesProvider.notifier).loadNextPage(),
               ),
               MoviHorizontalListview(
                 movies: popularMovies,
                 title: AppLocalizations.of(context)!.popular,
-                loadNextPage: () =>
-                    ref.read(popularMoviesProvider.notifier).loadNextPage(),
+                loadNextPage: () => ref.read(popularMoviesProvider.notifier).loadNextPage(),
               ),
               MoviHorizontalListview(
                 movies: tvShows,
                 isMovie: false,
-                showViews: false,
                 title: AppLocalizations.of(context)!.tvShows,
-                loadNextPage: () =>
-                    ref.read(tvShowsProvider.notifier).loadNextPage(),
+                loadNextPage: () => ref.read(tvShowsProvider.notifier).loadNextPage(),
               ),
               MoviHorizontalListview(
                 movies: upcomingMovies,
                 title: AppLocalizations.of(context)!.upcoming,
-                loadNextPage: () =>
-                    ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
+                loadNextPage: () => ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
                 showRate: false,
               ),
               const SizedBox(

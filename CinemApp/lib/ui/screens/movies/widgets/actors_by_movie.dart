@@ -18,11 +18,8 @@ class ActorsByMovie extends ConsumerWidget {
     if (actorsByMovie[movieID] == null && actorsByTvShow[movieID] == null) {
       return const Center(child: CircularProgressIndicator(strokeWidth: 2));
     }
-    print(actorsByMovie[movieID]);
-    print(isMovie);
-    print(actorsByTvShow[movieID]);
+
     final actors = isMovie ? actorsByMovie[movieID] : actorsByTvShow[movieID];
-    print(actors);
 
     final textStyle = Theme.of(context).textTheme;
     return Padding(
@@ -68,8 +65,7 @@ class ActorsByMovie extends ConsumerWidget {
                         actors[index].character!,
                         maxLines: 2,
                         style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            overflow: TextOverflow.ellipsis),
+                            fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis),
                       )
                     ],
                   ),

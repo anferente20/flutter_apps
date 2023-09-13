@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cinemapp/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomSliverAppbar extends StatelessWidget {
   const CustomSliverAppbar({super.key, required this.movie});
@@ -14,6 +15,12 @@ class CustomSliverAppbar extends StatelessWidget {
       backgroundColor: Colors.black,
       expandedHeight: size.height * 0.7,
       foregroundColor: Colors.white,
+      leading: IconButton(
+        onPressed: () => context.pop(),
+        icon: const Icon(
+          Icons.arrow_back_ios_new_outlined,
+        ),
+      ),
       flexibleSpace: FlexibleSpaceBar(
         titlePadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         background: Stack(

@@ -11,17 +11,13 @@ class TvShowsDatasourceImpl extends TvShowsDatasource {
   final dio = Dio(
     BaseOptions(
       baseUrl: 'https://api.themoviedb.org/3',
-      queryParameters: {
-        'api_key': Enviroment.theMovieDBKey,
-        'language': 'es-CO'
-      },
+      queryParameters: {'api_key': Enviroment.theMovieDBKey, 'language': 'es-CO'},
     ),
   );
 
   @override
   Future<List<TvShow>> getBestRated({int page = 1}) async {
-    final response =
-        await dio.get('/tv/top_rated', queryParameters: {'page': page});
+    final response = await dio.get('/tv/top_rated', queryParameters: {'page': page});
 
     return _jsonToMovies(response.data);
   }
@@ -44,9 +40,8 @@ class TvShowsDatasourceImpl extends TvShowsDatasource {
   ) {
     final movieResponse = MovieDBResponse.fromJson(json);
 
-    List<TvShow> movies = movieResponse.results
-        .map((movieDB) => MovieMapper.movieDBtoTvShowEntity(movieDB))
-        .toList();
+    List<TvShow> movies =
+        movieResponse.results.map((movieDB) => MovieMapper.movieDBtoTvShowEntity(movieDB)).toList();
 
     return movies;
   }
