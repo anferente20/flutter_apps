@@ -25,9 +25,9 @@ class SearchResultItem extends StatelessWidget {
       onTap: () {
         onMovieSelected;
         if (isTvShow) {
-          context.push('/tv-show/${item.id}');
+          context.push('/home/0/tv-show/${item.id}');
         } else {
-          context.push('/movie/${item.id}');
+          context.push('/home/0/movie/${item.id}');
         }
       },
       child: Padding(

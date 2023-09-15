@@ -66,9 +66,9 @@ class _MoviHorizontalListviewState extends State<MoviHorizontalListview> {
             return GestureDetector(
               onTap: () {
                 if (widget.isMovie) {
-                  context.push('/movie/${widget.movies[index].id}');
+                  context.push('/home/0/movie/${widget.movies[index].id}');
                 } else {
-                  context.push('/tv-show/${widget.movies[index].id}');
+                  context.push('/home/0/tv-show/${widget.movies[index].id}');
                 }
               },
               child: FadeInRight(
