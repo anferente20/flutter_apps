@@ -3,14 +3,23 @@ import 'package:cinemapp/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({
+    required this.pageIndex,
+    super.key,
+  });
+  final int pageIndex;
 
   static const path = 'home-screen';
+  final views = const [HomeView(), SizedBox(), FavoritesView(), ConfigurationView()];
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      bottomNavigationBar: CustomBottomNavigationBar(),
-      body: HomeView(),
+    return Scaffold(
+      bottomNavigationBar: CustomBottomNavigationBar(pageIndex: pageIndex),
+      body: IndexedStack(
+        index: pageIndex,
+        children: views,
+      ),
     );
   }
 }
