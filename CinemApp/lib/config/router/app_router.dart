@@ -25,9 +25,4 @@ final appRouter = GoRouter(initialLocation: '/', routes: [
           },
         ),
       ]),
-  GoRoute(
-    path: '/theme-selector',
-    name: ThemeSelectorScreen.path,
-    builder: (context, state) => const ThemeSelectorScreen(),
-  ),
 ]);
