@@ -1,3 +1,4 @@
+import 'package:cinemapp/ui/providers/providers.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cinemapp/config/router/app_router.dart';
@@ -11,14 +12,15 @@ Future<void> main() async {
   runApp(const ProviderScope(child: MainApp()));
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends ConsumerWidget {
   const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final AppTheme appTheme = ref.watch(themeNotifierProvider);
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      theme: AppTheme(isDarkMode: true).getTheme(),
+      theme: appTheme.getTheme(),
       routerConfig: appRouter,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
