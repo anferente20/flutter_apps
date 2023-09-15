@@ -8,9 +8,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/home/:page',
       name: HomeScreen.path,
-      builder: (context, state) => HomeScreen(
-        pageIndex: int.parse(state.pathParameters['page'] ?? '0'),
-      ),
+      builder: (context, state) {
+        int pageIndex = int.parse(state.pathParameters['page'] ?? '0');
+        return HomeScreen(pageIndex: pageIndex <= 2 ? pageIndex : 0);
+      },
       routes: [
         GoRoute(
           path: 'movie/:id',
