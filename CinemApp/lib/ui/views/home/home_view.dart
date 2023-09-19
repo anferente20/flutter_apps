@@ -74,12 +74,13 @@ class _HomeViewState extends ConsumerState<HomeView> {
                 title: AppLocalizations.of(context)!.tvShows,
                 loadNextPage: () => ref.read(tvShowsProvider.notifier).loadNextPage(),
               ),
-              MoviHorizontalListview(
-                movies: upcomingMovies,
-                title: AppLocalizations.of(context)!.upcoming,
-                loadNextPage: () => ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
-                showRate: false,
-              ),
+              if (upcomingMovies.isNotEmpty)
+                MoviHorizontalListview(
+                  movies: upcomingMovies,
+                  title: AppLocalizations.of(context)!.upcoming,
+                  loadNextPage: () => ref.read(upcomingMoviesProvider.notifier).loadNextPage(),
+                  showRate: false,
+                ),
               const SizedBox(
                 height: 20,
               )
