@@ -5,7 +5,7 @@ class CustomGradient extends StatelessWidget {
     super.key,
     required this.stops,
     required this.colors,
-    required this.begin,
+    this.begin = Alignment.centerLeft,
     this.end = Alignment.centerRight,
   });
   final AlignmentGeometry begin;

@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:animate_do/animate_do.dart';
-import 'package:cinemapp/domain/entities/movie.dart';
-import 'package:cinemapp/domain/entities/tv_show.dart';
+import 'package:cinemapp/domain/entities/movies/movie.dart';
+import 'package:cinemapp/domain/entities/tv_shows/tv_show.dart';
 import 'package:cinemapp/ui/widgets/shared/search/search_result_item.dart';
 import 'package:flutter/material.dart';
 

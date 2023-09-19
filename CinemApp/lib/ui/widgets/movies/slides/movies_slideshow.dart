@@ -1,6 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:card_swiper/card_swiper.dart';
-import 'package:cinemapp/domain/entities/movie.dart';
+import 'package:cinemapp/domain/entities/movies/movie.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,8 +22,8 @@ class MoviesSlideshow extends StatelessWidget {
         autoplay: true,
         pagination: SwiperPagination(
             margin: const EdgeInsets.only(top: 0),
-            builder: DotSwiperPaginationBuilder(
-                activeColor: colors.primary, color: colors.secondary)),
+            builder:
+                DotSwiperPaginationBuilder(activeColor: colors.primary, color: colors.secondary)),
         itemBuilder: (context, index) {
           return _Slide(
             movie: movies[index],
@@ -45,10 +45,7 @@ class _Slide extends StatelessWidget {
   Widget build(BuildContext context) {
     final decoration = BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        boxShadow: const [
-          BoxShadow(
-              color: Colors.black45, blurRadius: 10, offset: Offset(0, 10))
-        ]);
+        boxShadow: const [BoxShadow(color: Colors.black45, blurRadius: 10, offset: Offset(0, 10))]);
     return Padding(
       padding: const EdgeInsets.only(bottom: 30),
       child: DecoratedBox(
@@ -62,8 +59,7 @@ class _Slide extends StatelessWidget {
               fit: BoxFit.cover,
               loadingBuilder: (context, child, loadingProgress) {
                 if (loadingProgress != null) {
-                  return const DecoratedBox(
-                      decoration: BoxDecoration(color: Colors.black12));
+                  return const DecoratedBox(decoration: BoxDecoration(color: Colors.black12));
                 }
                 return FadeIn(child: child);
               },

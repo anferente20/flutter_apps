@@ -1,4 +1,4 @@
-import 'package:cinemapp/domain/entities/tv_show.dart';
+import 'package:cinemapp/domain/entities/tv_shows/tv_show.dart';
 
 abstract class TvShowsDatasource {
   //* List of TV Shows

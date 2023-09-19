@@ -1,4 +1,4 @@
-import 'package:cinemapp/domain/entities/movie.dart';
+import 'package:cinemapp/domain/entities/movies/movie.dart';
 import 'package:cinemapp/ui/screens/movies/widgets/actors_by_movie.dart';
 import 'package:cinemapp/ui/screens/movies/widgets/streaming_providers_by_movie.dart';
 import 'package:flutter/material.dart';
@@ -59,8 +59,7 @@ class MovieDetails extends StatelessWidget {
                   margin: const EdgeInsets.only(right: 10),
                   child: Chip(
                     label: Text(genre),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                   ),
                 ),
               )

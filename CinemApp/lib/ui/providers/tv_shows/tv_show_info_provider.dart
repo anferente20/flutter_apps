@@ -1,9 +1,8 @@
-import 'package:cinemapp/domain/entities/tv_show.dart';
+import 'package:cinemapp/domain/entities/tv_shows/tv_show.dart';
 import 'package:cinemapp/ui/providers/tv_shows/tv_show_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final tvShowInfoProvider =
-    StateNotifierProvider<TvShowMapNotifier, Map<String, TvShow>>((ref) {
+final tvShowInfoProvider = StateNotifierProvider<TvShowMapNotifier, Map<String, TvShow>>((ref) {
   final getTvShow = ref.watch(tvShowRepositoryProvider).getTvShowByID;
 
   return TvShowMapNotifier(getTvShow: getTvShow);

@@ -1,4 +1,4 @@
-import 'package:cinemapp/domain/entities/movie.dart';
+import 'package:cinemapp/domain/entities/movies/movie.dart';
 import 'package:cinemapp/ui/providers/providers.dart';
 import 'package:cinemapp/ui/widgets/delegates/search_movie_delegate.dart';
 import 'package:flutter/material.dart';

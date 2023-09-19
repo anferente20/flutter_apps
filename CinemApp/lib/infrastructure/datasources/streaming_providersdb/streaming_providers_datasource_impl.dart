@@ -1,6 +1,6 @@
 import 'package:cinemapp/config/constants/environment.dart';
 import 'package:cinemapp/domain/datasources/streaming_provider/provider_datasource.dart';
-import 'package:cinemapp/domain/entities/streaming_provider.dart';
+import 'package:cinemapp/domain/entities/streaming_providers/streaming_provider.dart';
 import 'package:cinemapp/infrastructure/mappers/streaming_provider_mapper.dart';
 import 'package:cinemapp/infrastructure/models/moviedb/streaming_provider/streaming_provider_response.dart';
 import 'package:devicelocale/devicelocale.dart';
@@ -10,10 +10,7 @@ class StreamingProvidersdbDatasourceImpl extends StreamingProviderDatasource {
   final dio = Dio(
     BaseOptions(
       baseUrl: 'https://api.themoviedb.org/3',
-      queryParameters: {
-        'api_key': Enviroment.theMovieDBKey,
-        'language': 'es-CO'
-      },
+      queryParameters: {'api_key': Enviroment.theMovieDBKey, 'language': 'es-CO'},
     ),
   );
 
@@ -26,12 +23,9 @@ class StreamingProvidersdbDatasourceImpl extends StreamingProviderDatasource {
     String? locale = await Devicelocale.currentLocale;
 
     List<StreamingProvider> providers = [];
-    if (streamingResponse.results.countries[locale?.split('-')[1]]?.flatrate !=
-        null) {
-      providers = streamingResponse
-          .results.countries[locale?.split('-')[1]]!.flatrate!
-          .map((movieResult) =>
-              StreamingProviderMapper.castToEntity(movieResult))
+    if (streamingResponse.results.countries[locale?.split('-')[1]]?.flatrate != null) {
+      providers = streamingResponse.results.countries[locale?.split('-')[1]]!.flatrate!
+          .map((movieResult) => StreamingProviderMapper.castToEntity(movieResult))
           .toList();
     }
     return providers;
@@ -46,12 +40,9 @@ class StreamingProvidersdbDatasourceImpl extends StreamingProviderDatasource {
     String? locale = await Devicelocale.currentLocale;
 
     List<StreamingProvider> providers = [];
-    if (streamingResponse.results.countries[locale?.split('-')[1]]?.flatrate !=
-        null) {
-      providers = streamingResponse
-          .results.countries[locale?.split('-')[1]]!.flatrate!
-          .map((movieResult) =>
-              StreamingProviderMapper.castToEntity(movieResult))
+    if (streamingResponse.results.countries[locale?.split('-')[1]]?.flatrate != null) {
+      providers = streamingResponse.results.countries[locale?.split('-')[1]]!.flatrate!
+          .map((movieResult) => StreamingProviderMapper.castToEntity(movieResult))
           .toList();
     }
     return providers;

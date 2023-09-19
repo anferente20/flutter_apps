@@ -1,4 +1,4 @@
-import 'package:cinemapp/domain/entities/actor.dart';
+import 'package:cinemapp/domain/entities/actors/actor.dart';
 import 'package:cinemapp/ui/providers/actors/actors_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

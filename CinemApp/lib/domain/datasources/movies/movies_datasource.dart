@@ -1,4 +1,4 @@
-import 'package:cinemapp/domain/entities/movie.dart';
+import 'package:cinemapp/domain/entities/movies/movie.dart';
 
 abstract class MoviesDatasource {
   //* List of movies

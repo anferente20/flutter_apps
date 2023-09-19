@@ -1,4 +1,4 @@
-import 'package:cinemapp/domain/entities/tv_show.dart';
+import 'package:cinemapp/domain/entities/tv_shows/tv_show.dart';
 import 'package:cinemapp/ui/providers/providers.dart';
 import 'package:cinemapp/ui/screens/movies/widgets/custom_sliver_appbar.dart';
 import 'package:cinemapp/ui/screens/movies/widgets/movie_details.dart';
@@ -20,9 +20,7 @@ class _TvShowScreenState extends ConsumerState<TvShowScreen> {
   void initState() {
     super.initState();
     ref.read(tvShowInfoProvider.notifier).loadTvShow(widget.tvShowID);
-    ref
-        .read(getActorsByTvShowProvider.notifier)
-        .loadActors(int.parse(widget.tvShowID));
+    ref.read(getActorsByTvShowProvider.notifier).loadActors(int.parse(widget.tvShowID));
     ref
         .read(getTvShowStreamingProvidersProvider.notifier)
         .loadStreamingProviders(int.parse(widget.tvShowID));

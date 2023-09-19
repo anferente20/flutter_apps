@@ -1,9 +1,8 @@
-import 'package:cinemapp/domain/entities/movie.dart';
+import 'package:cinemapp/domain/entities/movies/movie.dart';
 import 'package:cinemapp/ui/providers/movies/movies_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final movieInfoProvider =
-    StateNotifierProvider<MovieMapNotifier, Map<String, Movie>>((ref) {
+final movieInfoProvider = StateNotifierProvider<MovieMapNotifier, Map<String, Movie>>((ref) {
   final getMovie = ref.watch(movieRepositoryProvider).getMovieByID;
 
   return MovieMapNotifier(getMovie: getMovie);

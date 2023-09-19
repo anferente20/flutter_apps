@@ -1,6 +1,6 @@
 import 'package:cinemapp/config/constants/environment.dart';
 import 'package:cinemapp/domain/datasources/tv_shows/tv_shows_datasource.dart';
-import 'package:cinemapp/domain/entities/tv_show.dart';
+import 'package:cinemapp/domain/entities/tv_shows/tv_show.dart';
 import 'package:cinemapp/infrastructure/mappers/movie_mapper.dart';
 import 'package:cinemapp/infrastructure/mappers/tv_show_mapper.dart';
 import 'package:cinemapp/infrastructure/models/moviedb/movies/moviedb_response.dart';

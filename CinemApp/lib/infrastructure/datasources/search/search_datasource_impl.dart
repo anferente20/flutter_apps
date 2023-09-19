@@ -1,7 +1,7 @@
 import 'package:cinemapp/config/constants/environment.dart';
 import 'package:cinemapp/domain/datasources/search/search_datasource.dart';
-import 'package:cinemapp/domain/entities/movie.dart';
-import 'package:cinemapp/domain/entities/tv_show.dart';
+import 'package:cinemapp/domain/entities/movies/movie.dart';
+import 'package:cinemapp/domain/entities/tv_shows/tv_show.dart';
 import 'package:cinemapp/infrastructure/mappers/movie_mapper.dart';
 import 'package:cinemapp/infrastructure/models/moviedb/movies/moviedb_response.dart';
 import 'package:dio/dio.dart';

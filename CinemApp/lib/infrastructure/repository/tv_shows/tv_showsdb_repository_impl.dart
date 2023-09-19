@@ -1,5 +1,5 @@
 import 'package:cinemapp/domain/datasources/tv_shows/tv_shows_datasource.dart';
-import 'package:cinemapp/domain/entities/tv_show.dart';
+import 'package:cinemapp/domain/entities/tv_shows/tv_show.dart';
 import 'package:cinemapp/domain/repositories/tv_shows/tv_shows_repository.dart';
 
 class TvShowsdbRepositoryImpl extends TvShowsRepository {

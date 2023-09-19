@@ -1,5 +1,5 @@
-import 'package:cinemapp/domain/entities/movie.dart';
-import 'package:cinemapp/domain/entities/tv_show.dart';
+import 'package:cinemapp/domain/entities/movies/movie.dart';
+import 'package:cinemapp/domain/entities/tv_shows/tv_show.dart';
 
 abstract class SearchDatasource {
   //* Search Movie

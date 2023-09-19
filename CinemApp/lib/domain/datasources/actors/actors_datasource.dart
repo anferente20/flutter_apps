@@ -1,4 +1,4 @@
-import 'package:cinemapp/domain/entities/actor.dart';
+import 'package:cinemapp/domain/entities/actors/actor.dart';
 
 abstract class ActorsDatasource {
   Future<List<Actor>> getActorsByMovie(int movieID);

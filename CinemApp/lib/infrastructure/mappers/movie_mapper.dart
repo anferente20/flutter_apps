@@ -1,6 +1,6 @@
 import 'package:cinemapp/config/constants/images.dart';
-import 'package:cinemapp/domain/entities/movie.dart';
-import 'package:cinemapp/domain/entities/tv_show.dart';
+import 'package:cinemapp/domain/entities/movies/movie.dart';
+import 'package:cinemapp/domain/entities/tv_shows/tv_show.dart';
 import 'package:cinemapp/infrastructure/models/moviedb/movies/movie_moviedb.dart';
 import 'package:cinemapp/infrastructure/models/moviedb/movies/movie_details.dart';
 

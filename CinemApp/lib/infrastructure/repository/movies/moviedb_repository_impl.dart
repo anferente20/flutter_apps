@@ -1,5 +1,5 @@
 import 'package:cinemapp/domain/datasources/movies/movies_datasource.dart';
-import 'package:cinemapp/domain/entities/movie.dart';
+import 'package:cinemapp/domain/entities/movies/movie.dart';
 import 'package:cinemapp/domain/repositories/movies/movies_repository.dart';
 
 class MoviedbRepositoryImpl extends MoviesRepository {
