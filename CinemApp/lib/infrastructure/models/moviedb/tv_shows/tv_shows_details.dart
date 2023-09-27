@@ -70,10 +70,8 @@ class TvShowDetails {
   factory TvShowDetails.fromJson(Map<String, dynamic> json) => TvShowDetails(
         adult: json["adult"],
         backdropPath: json["backdrop_path"],
-        createdBy: List<CreatedBy>.from(
-            json["created_by"].map((x) => CreatedBy.fromJson(x))),
-        episodeRunTime:
-            List<dynamic>.from(json["episode_run_time"].map((x) => x)),
+        createdBy: List<CreatedBy>.from(json["created_by"].map((x) => CreatedBy.fromJson(x))),
+        episodeRunTime: List<dynamic>.from(json["episode_run_time"].map((x) => x)),
         firstAirDate: DateTime.parse(json["first_air_date"]),
         genres: List<Genre>.from(json["genres"].map((x) => Genre.fromJson(x))),
         homepage: json["homepage"],
@@ -81,12 +79,10 @@ class TvShowDetails {
         inProduction: json["in_production"],
         languages: List<String>.from(json["languages"].map((x) => x)),
         lastAirDate: DateTime.parse(json["last_air_date"]),
-        lastEpisodeToAir:
-            LastEpisodeToAir.fromJson(json["last_episode_to_air"]),
+        lastEpisodeToAir: LastEpisodeToAir.fromJson(json["last_episode_to_air"]),
         name: json["name"],
         nextEpisodeToAir: json["next_episode_to_air"],
-        networks: List<Network>.from(
-            json["networks"].map((x) => Network.fromJson(x))),
+        networks: List<Network>.from(json["networks"].map((x) => Network.fromJson(x))),
         numberOfEpisodes: json["number_of_episodes"],
         numberOfSeasons: json["number_of_seasons"],
         originCountry: List<String>.from(json["origin_country"].map((x) => x)),
@@ -95,13 +91,11 @@ class TvShowDetails {
         overview: json["overview"],
         popularity: json["popularity"]?.toDouble(),
         posterPath: json["poster_path"],
-        productionCompanies: List<Network>.from(
-            json["production_companies"].map((x) => Network.fromJson(x))),
+        productionCompanies:
+            List<Network>.from(json["production_companies"].map((x) => Network.fromJson(x))),
         productionCountries: List<ProductionCountry>.from(
-            json["production_countries"]
-                .map((x) => ProductionCountry.fromJson(x))),
-        seasons:
-            List<Season>.from(json["seasons"].map((x) => Season.fromJson(x))),
+            json["production_countries"].map((x) => ProductionCountry.fromJson(x))),
+        seasons: List<Season>.from(json["seasons"].map((x) => Season.fromJson(x))),
         spokenLanguages: List<SpokenLanguage>.from(
             json["spoken_languages"].map((x) => SpokenLanguage.fromJson(x))),
         status: json["status"],
@@ -132,7 +126,7 @@ class CreatedBy {
         creditId: json["credit_id"],
         name: json["name"],
         gender: json["gender"],
-        profilePath: json["profile_path"],
+        profilePath: json["profile_path"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
@@ -195,8 +189,7 @@ class LastEpisodeToAir {
     required this.stillPath,
   });
 
-  factory LastEpisodeToAir.fromJson(Map<String, dynamic> json) =>
-      LastEpisodeToAir(
+  factory LastEpisodeToAir.fromJson(Map<String, dynamic> json) => LastEpisodeToAir(
         id: json["id"],
         name: json["name"],
         overview: json["overview"],
@@ -209,7 +202,7 @@ class LastEpisodeToAir {
         runtime: json["runtime"],
         seasonNumber: json["season_number"],
         showId: json["show_id"],
-        stillPath: json["still_path"],
+        stillPath: json["still_path"] ?? '',
       );
 }
 
@@ -250,8 +243,7 @@ class ProductionCountry {
     required this.name,
   });
 
-  factory ProductionCountry.fromJson(Map<String, dynamic> json) =>
-      ProductionCountry(
+  factory ProductionCountry.fromJson(Map<String, dynamic> json) => ProductionCountry(
         iso31661: json["iso_3166_1"],
         name: json["name"],
       );
@@ -284,9 +276,7 @@ class Season {
   });
 
   factory Season.fromJson(Map<String, dynamic> json) => Season(
-        airDate: json["air_date"] != null
-            ? DateTime.parse(json["air_date"])
-            : DateTime.now(),
+        airDate: json["air_date"] != null ? DateTime.parse(json["air_date"]) : DateTime.now(),
         episodeCount: json["episode_count"],
         id: json["id"],
         name: json["name"],

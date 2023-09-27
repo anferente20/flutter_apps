@@ -16,5 +16,6 @@ class TvShow extends Movie {
     required super.video,
     required super.voteAverage,
     required super.voteCount,
+    required super.isMovie,
   });
 }

@@ -10,7 +10,6 @@ class MoviHorizontalListview extends StatefulWidget {
   final String? subtitle;
   final VoidCallback? loadNextPage;
   final bool showRate;
-  final bool isMovie;
 
   const MoviHorizontalListview({
     required this.movies,
@@ -18,7 +17,6 @@ class MoviHorizontalListview extends StatefulWidget {
     this.subtitle,
     this.loadNextPage,
     this.showRate = true,
-    this.isMovie = true,
     super.key,
   });
 
@@ -65,7 +63,7 @@ class _MoviHorizontalListviewState extends State<MoviHorizontalListview> {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                if (widget.isMovie) {
+                if (widget.movies[index].isMovie) {
                   context.push('/home/0/movie/${widget.movies[index].id}');
                 } else {
                   context.push('/home/0/tv-show/${widget.movies[index].id}');

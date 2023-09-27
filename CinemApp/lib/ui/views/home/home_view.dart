@@ -70,7 +70,6 @@ class _HomeViewState extends ConsumerState<HomeView> {
               ),
               MoviHorizontalListview(
                 movies: tvShows,
-                isMovie: false,
                 title: AppLocalizations.of(context)!.tvShows,
                 loadNextPage: () => ref.read(tvShowsProvider.notifier).loadNextPage(),
               ),

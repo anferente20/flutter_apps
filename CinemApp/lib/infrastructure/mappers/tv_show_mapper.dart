@@ -22,5 +22,6 @@ class TvShowMapper {
         video: false,
         voteAverage: tvShowDB.voteAverage,
         voteCount: tvShowDB.voteCount,
+        isMovie: false,
       );
 }

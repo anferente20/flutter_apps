@@ -1,4 +1,5 @@
 import 'package:cinemapp/ui/providers/storage/favorites_provider.dart';
+import 'package:cinemapp/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,17 +19,10 @@ class _FavoritesViewState extends ConsumerState<FavoritesView> {
 
   @override
   Widget build(BuildContext context) {
-    final favorites = ref.watch(favoritesMoviesProvider);
-    final favoritesIndexes = favorites.keys.toList();
+    final favorites = ref.watch(favoritesMoviesProvider).values.toList();
     return Scaffold(
-      body: ListView.builder(
-        itemCount: favorites.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(favorites[favoritesIndexes[index]]!.title),
-          );
-        },
-      ),
-    );
+        body: MoviesMasonryGridState(
+      movies: favorites,
+    ));
   }
 }
