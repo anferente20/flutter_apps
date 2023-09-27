@@ -12,3 +12,5 @@ export 'tv_shows/tv_show_repository_provider.dart';
 export 'tv_shows/tv_shows_provider.dart';
 export 'search/search_provider.dart';
 export 'search/search_repository_provider.dart';
+export 'package:cinemapp/ui/providers/storage/local_storage_repository_provider.dart';
+export 'package:cinemapp/ui/providers/storage/favorites_provider.dart';

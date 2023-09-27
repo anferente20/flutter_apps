@@ -1,17 +1,20 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cinemapp/domain/entities/movies/movie.dart';
+import 'package:cinemapp/ui/providers/providers.dart';
 import 'package:cinemapp/ui/widgets/shared/gradients/custom_gradient.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class CustomSliverAppbar extends StatelessWidget {
+class CustomSliverAppbar extends ConsumerWidget {
   const CustomSliverAppbar({super.key, required this.movie});
 
   final Movie movie;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
+    final isFavorite = ref.watch(isFavoriteProvider(movie.id));
     return SliverAppBar(
       backgroundColor: Colors.black,
       expandedHeight: size.height * 0.7,
@@ -24,12 +27,20 @@ class CustomSliverAppbar extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.favorite_border_outlined),
-          // icon: Icon(
-          //   Icons.favorite_outlined,
-          //   color: Colors.redAccent,
-          // ),
+          onPressed: () {
+            ref.watch(localStorageRepoisitoryProvider).toggleFavorite(movie);
+            ref.invalidate(isFavoriteProvider(movie.id));
+          },
+          icon: isFavorite.when(
+            data: (data) => Icon(
+              data ? Icons.favorite_rounded : Icons.favorite_border_outlined,
+              color: data ? Colors.red : Colors.white,
+            ),
+            error: (error, stackTrace) => throw UnimplementedError(),
+            loading: () => const CircularProgressIndicator(
+              strokeWidth: 2,
+            ),
+          ),
         )
       ],
       flexibleSpace: FlexibleSpaceBar(
