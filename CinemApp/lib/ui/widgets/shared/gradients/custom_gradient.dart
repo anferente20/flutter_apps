@@ -21,8 +21,8 @@ class CustomGradient extends StatelessWidget {
           gradient: LinearGradient(
             begin: begin,
             end: end,
-            stops: [stops[0], stops[1]],
-            colors: [colors[0], colors[0]],
+            stops: stops,
+            colors: colors,
           ),
         ),
       ),
