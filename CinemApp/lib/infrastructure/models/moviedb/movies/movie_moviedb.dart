@@ -1,3 +1,5 @@
+import 'package:cinemapp/config/constants/images.dart';
+
 class MovieMovieDB {
   final bool adult;
   final String? backdropPath;
@@ -37,14 +39,14 @@ class MovieMovieDB {
 
   factory MovieMovieDB.fromJson(Map<String, dynamic> json) => MovieMovieDB(
         adult: json["adult"] ?? false,
-        backdropPath: json["backdrop_path"] ?? '',
+        backdropPath: json["backdrop_path"] ?? Images.posterNotFound,
         genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
         id: json["id"],
         originalLanguage: json["original_language"]!,
         originalTitle: json["original_title"] ?? '',
         overview: json["overview"] ?? '',
         popularity: json["popularity"]?.toDouble(),
-        posterPath: json["poster_path"] ?? '',
+        posterPath: json["poster_path"] ?? Images.posterNotFound,
         releaseDate: json["release_date"] != null && json["release_date"] != ""
             ? DateTime.parse(json["release_date"])
             : DateTime.now(),

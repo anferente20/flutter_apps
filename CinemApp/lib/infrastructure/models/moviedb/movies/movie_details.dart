@@ -1,3 +1,5 @@
+import 'package:cinemapp/config/constants/images.dart';
+
 class MovieDetails {
   MovieDetails({
     required this.adult,
@@ -55,7 +57,7 @@ class MovieDetails {
 
   factory MovieDetails.fromJson(Map<String, dynamic> json) => MovieDetails(
         adult: json["adult"],
-        backdropPath: json["backdrop_path"] ?? '',
+        backdropPath: json["backdrop_path"] ?? Images.posterNotFound,
         belongsToCollection: json["belongs_to_collection"] == null
             ? null
             : BelongsToCollection.fromJson(json["belongs_to_collection"]),
@@ -63,12 +65,12 @@ class MovieDetails {
         genres: List<Genre>.from(json["genres"].map((x) => Genre.fromJson(x))),
         homepage: json["homepage"],
         id: json["id"],
-        imdbId: json["imdb_id"],
+        imdbId: json["imdb_id"] ?? '',
         originalLanguage: json["original_language"],
         originalTitle: json["original_title"],
         overview: json["overview"],
         popularity: json["popularity"]?.toDouble(),
-        posterPath: json["poster_path"] ?? '',
+        posterPath: json["poster_path"] ?? Images.posterNotFound,
         productionCompanies: List<ProductionCompany>.from(
             json["production_companies"].map((x) => ProductionCompany.fromJson(x))),
         productionCountries: List<ProductionCountry>.from(
@@ -131,9 +133,9 @@ class BelongsToCollection {
 
   factory BelongsToCollection.fromJson(Map<String, dynamic> json) => BelongsToCollection(
         id: json["id"],
-        name: json["name"],
+        name: json["name"] ?? '',
         posterPath: json["poster_path"] ?? '',
-        backdropPath: json["backdrop_path"],
+        backdropPath: json["backdrop_path"] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
