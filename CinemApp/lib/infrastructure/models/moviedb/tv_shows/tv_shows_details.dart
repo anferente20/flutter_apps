@@ -1,3 +1,5 @@
+import 'package:cinemapp/config/constants/images.dart';
+
 class TvShowDetails {
   final bool adult;
   final String backdropPath;
@@ -10,7 +12,7 @@ class TvShowDetails {
   final bool inProduction;
   final List<String> languages;
   final DateTime lastAirDate;
-  final LastEpisodeToAir lastEpisodeToAir;
+  final LastEpisodeToAir? lastEpisodeToAir;
   final String name;
   final dynamic nextEpisodeToAir;
   final List<Network> networks;
@@ -44,7 +46,7 @@ class TvShowDetails {
     required this.inProduction,
     required this.languages,
     required this.lastAirDate,
-    required this.lastEpisodeToAir,
+    this.lastEpisodeToAir,
     required this.name,
     required this.nextEpisodeToAir,
     required this.networks,
@@ -69,17 +71,23 @@ class TvShowDetails {
 
   factory TvShowDetails.fromJson(Map<String, dynamic> json) => TvShowDetails(
         adult: json["adult"],
-        backdropPath: json["backdrop_path"],
+        backdropPath: json["backdrop_path"] ?? Images.posterNotFound,
         createdBy: List<CreatedBy>.from(json["created_by"].map((x) => CreatedBy.fromJson(x))),
         episodeRunTime: List<dynamic>.from(json["episode_run_time"].map((x) => x)),
-        firstAirDate: DateTime.parse(json["first_air_date"]),
+        firstAirDate: json["first_air_date"] != '' && json["first_air_date"] != ''
+            ? DateTime.parse(json["first_air_date"])
+            : DateTime.now(),
         genres: List<Genre>.from(json["genres"].map((x) => Genre.fromJson(x))),
         homepage: json["homepage"],
         id: json["id"],
         inProduction: json["in_production"],
         languages: List<String>.from(json["languages"].map((x) => x)),
-        lastAirDate: DateTime.parse(json["last_air_date"]),
-        lastEpisodeToAir: LastEpisodeToAir.fromJson(json["last_episode_to_air"]),
+        lastAirDate: json["last_air_date"] != '' && json["last_air_date"] != null
+            ? DateTime.parse(json["last_air_date"])
+            : DateTime.now(),
+        lastEpisodeToAir: json["last_episode_to_air"] != null
+            ? LastEpisodeToAir.fromJson(json["last_episode_to_air"])
+            : null,
         name: json["name"],
         nextEpisodeToAir: json["next_episode_to_air"],
         networks: List<Network>.from(json["networks"].map((x) => Network.fromJson(x))),
@@ -126,7 +134,7 @@ class CreatedBy {
         creditId: json["credit_id"],
         name: json["name"],
         gender: json["gender"],
-        profilePath: json["profile_path"] ?? '',
+        profilePath: json["profile_path"] ?? Images.profileNotFound,
       );
 
   Map<String, dynamic> toJson() => {
@@ -281,7 +289,7 @@ class Season {
         id: json["id"],
         name: json["name"],
         overview: json["overview"],
-        posterPath: json["poster_path"] ?? '',
+        posterPath: json["poster_path"] ?? Images.posterNotFound,
         seasonNumber: json["season_number"],
         voteAverage: json["vote_average"]?.toDouble(),
       );
