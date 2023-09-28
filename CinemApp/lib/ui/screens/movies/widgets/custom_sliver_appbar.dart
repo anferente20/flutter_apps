@@ -6,15 +6,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class CustomSliverAppbar extends ConsumerWidget {
+class CustomSliverAppbar extends ConsumerStatefulWidget {
   const CustomSliverAppbar({super.key, required this.movie});
 
   final Movie movie;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<CustomSliverAppbar> createState() => _CustomSliverAppbarState();
+}
+
+class _CustomSliverAppbarState extends ConsumerState<CustomSliverAppbar> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final isFavorite = ref.watch(isFavoriteProvider(movie.id));
+    final isFavorite = ref.watch(isFavoriteProvider(widget.movie.id));
     return SliverAppBar(
       backgroundColor: Colors.black,
       expandedHeight: size.height * 0.7,
@@ -27,9 +37,9 @@ class CustomSliverAppbar extends ConsumerWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () {
-            ref.watch(localStorageRepoisitoryProvider).toggleFavorite(movie);
-            ref.invalidate(isFavoriteProvider(movie.id));
+          onPressed: () async {
+            await ref.read(favoritesMoviesProvider.notifier).toggleFavorite(widget.movie);
+            ref.invalidate(isFavoriteProvider(widget.movie.id));
           },
           icon: isFavorite.when(
             data: (data) => Icon(
@@ -49,7 +59,7 @@ class CustomSliverAppbar extends ConsumerWidget {
           children: [
             SizedBox.expand(
               child: Image.network(
-                movie.posterPath,
+                widget.movie.posterPath,
                 fit: BoxFit.cover,
                 loadingBuilder: (context, child, loadingProgress) {
                   if (loadingProgress != null) return const SizedBox();

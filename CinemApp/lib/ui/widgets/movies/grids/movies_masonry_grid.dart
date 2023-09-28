@@ -1,5 +1,4 @@
 import 'package:cinemapp/domain/entities/movies/movie.dart';
-import 'package:cinemapp/domain/entities/tv_shows/tv_show.dart';
 import 'package:cinemapp/ui/widgets/movies/poster/movie_poster_link.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -11,6 +10,7 @@ class MoviesMasonryGridState extends StatefulWidget {
   const MoviesMasonryGridState({
     required this.movies,
     this.loadNextPage,
+    super.key,
   });
 
   @override
@@ -18,13 +18,22 @@ class MoviesMasonryGridState extends StatefulWidget {
 }
 
 class _MoviesMasonryGridStateState extends State<MoviesMasonryGridState> {
+  final scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
+    scrollController.addListener(() {
+      if (widget.loadNextPage == null) return;
+      if (scrollController.position.pixels + 100 >= scrollController.position.maxScrollExtent) {
+        widget.loadNextPage!();
+      }
+    });
   }
 
   @override
   void dispose() {
+    scrollController.dispose();
     super.dispose();
   }
 
@@ -33,6 +42,7 @@ class _MoviesMasonryGridStateState extends State<MoviesMasonryGridState> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: MasonryGridView.count(
+        controller: scrollController,
         crossAxisCount: 3,
         itemCount: widget.movies.length,
         mainAxisSpacing: 10,
