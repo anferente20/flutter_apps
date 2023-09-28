@@ -1,23 +1,12 @@
-import 'dart:ui';
-
 import 'package:cinemapp/domain/datasources/local_storage/local_storage_datasource.dart';
 import 'package:cinemapp/domain/entities/movies/movie.dart';
+import 'package:cinemapp/domain/entities/theme/theme_app.dart';
 import 'package:cinemapp/domain/repositories/local_storage/local_storage_repository.dart';
 
 class LocalStorageImpl extends LocalStorageRepository {
   final LocalStorageDatasource localStorageDatasource;
 
   LocalStorageImpl({required this.localStorageDatasource});
-
-  @override
-  Future<Color> getColorSchema() {
-    return localStorageDatasource.getColorSchema();
-  }
-
-  @override
-  Future<bool> isDarkMode() {
-    return localStorageDatasource.isDarkMode();
-  }
 
   @override
   Future<bool> isMovieFavorite(int movieId) {
@@ -32,5 +21,15 @@ class LocalStorageImpl extends LocalStorageRepository {
   @override
   Future<void> toggleFavorite(Movie movie) {
     return localStorageDatasource.toggleFavorite(movie);
+  }
+
+  @override
+  Future<List<ThemeApp>> getThemeconfiguration() {
+    return localStorageDatasource.getThemeconfiguration();
+  }
+
+  @override
+  Future<void> setThemeconfiguration(ThemeApp theme) {
+    return localStorageDatasource.setThemeconfiguration(theme);
   }
 }

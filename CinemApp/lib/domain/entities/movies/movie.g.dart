@@ -163,7 +163,7 @@ Movie _movieDeserialize(
     backdropPath: reader.readString(offsets[1]),
     genreIds: reader.readStringList(offsets[2]) ?? [],
     id: reader.readLong(offsets[3]),
-    isMovie: reader.readBoolOrNull(offsets[4]) ?? true,
+    isMovie: reader.readBool(offsets[4]),
     originalLanguage: reader.readString(offsets[5]),
     originalTitle: reader.readString(offsets[6]),
     overview: reader.readString(offsets[7]),
@@ -195,7 +195,7 @@ P _movieDeserializeProp<P>(
     case 3:
       return (reader.readLong(offset)) as P;
     case 4:
-      return (reader.readBoolOrNull(offset) ?? true) as P;
+      return (reader.readBool(offset)) as P;
     case 5:
       return (reader.readString(offset)) as P;
     case 6:

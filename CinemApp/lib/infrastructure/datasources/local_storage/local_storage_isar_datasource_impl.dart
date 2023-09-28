@@ -1,7 +1,6 @@
-import 'dart:ui';
-
 import 'package:cinemapp/domain/datasources/local_storage/local_storage_datasource.dart';
 import 'package:cinemapp/domain/entities/movies/movie.dart';
+import 'package:cinemapp/domain/entities/theme/theme_app.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -15,21 +14,9 @@ class LocalStorageIsarDatasourceImpl extends LocalStorageDatasource {
   Future<Isar> openDB() async {
     final dir = await getApplicationDocumentsDirectory();
     if (Isar.instanceNames.isEmpty) {
-      return await Isar.open([MovieSchema], directory: dir.path, inspector: true);
+      return await Isar.open([MovieSchema, ThemeAppSchema], directory: dir.path, inspector: true);
     }
     return Future.value(Isar.getInstance());
-  }
-
-  @override
-  Future<Color> getColorSchema() {
-    // TODO: implement getColorSchema
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<bool> isDarkMode() {
-    // TODO: implement isDarkMode
-    throw UnimplementedError();
   }
 
   @override
@@ -48,12 +35,27 @@ class LocalStorageIsarDatasourceImpl extends LocalStorageDatasource {
   @override
   Future<void> toggleFavorite(Movie movie) async {
     final isar = await db;
-    print('IS MOVIE: ${movie.isMovie}');
     final Movie? favoriteMovie = await isar.movies.filter().idEqualTo(movie.id).findFirst();
     if (favoriteMovie != null) {
       isar.writeTxnSync(() => isar.movies.deleteSync(favoriteMovie.isarID!));
       return;
     }
     isar.writeTxnSync(() => isar.movies.putSync(movie));
+  }
+
+  @override
+  Future<List<ThemeApp>> getThemeconfiguration() async {
+    final isar = await db;
+    return await isar.themeApps.where().findAll();
+  }
+
+  @override
+  Future<void> setThemeconfiguration(ThemeApp theme) async {
+    final isar = await db;
+    final ThemeApp? isarTheme = await isar.themeApps.where().findFirst();
+    if (isarTheme != null) {
+      isar.writeTxnSync(() => isar.themeApps.deleteSync(isarTheme.isarID!));
+    }
+    isar.writeTxnSync(() => isar.themeApps.putSync(theme));
   }
 }

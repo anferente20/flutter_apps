@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:cinemapp/domain/entities/theme/theme_app.dart';
 import 'package:cinemapp/domain/entities/movies/movie.dart';
 
 abstract class LocalStorageDatasource {
@@ -8,6 +8,6 @@ abstract class LocalStorageDatasource {
   Future<List<Movie>> loadMovies({int limit = 10, offset = 0});
 
   //** get theme info */
-  Future<bool> isDarkMode();
-  Future<Color> getColorSchema();
+  Future<List<ThemeApp>> getThemeconfiguration();
+  Future<void> setThemeconfiguration(ThemeApp theme);
 }

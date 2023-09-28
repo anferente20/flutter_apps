@@ -20,7 +20,7 @@ class MainApp extends ConsumerWidget {
     final AppTheme appTheme = ref.watch(themeNotifierProvider);
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      theme: appTheme.getTheme(),
+      theme: appTheme.getTheme(ref),
       routerConfig: appRouter,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,

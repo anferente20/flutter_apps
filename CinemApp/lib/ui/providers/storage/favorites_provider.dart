@@ -1,6 +1,7 @@
 import 'package:cinemapp/domain/entities/movies/movie.dart';
 import 'package:cinemapp/domain/repositories/local_storage/local_storage_repository.dart';
-import 'package:cinemapp/ui/providers/storage/local_storage_repository_provider.dart';
+import 'package:cinemapp/ui/providers/providers.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final isFavoriteProvider = FutureProvider.family.autoDispose((ref, int movieId) {

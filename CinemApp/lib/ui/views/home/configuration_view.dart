@@ -1,4 +1,5 @@
-import 'package:cinemapp/ui/providers/theme/theme_provider.dart';
+import 'package:cinemapp/domain/entities/theme/theme_app.dart';
+import 'package:cinemapp/ui/providers/providers.dart';
 import 'package:cinemapp/ui/widgets/shared/appbar/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,8 +11,20 @@ class ConfigurationView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final List<Color> colors = ref.watch(colorThemProvider);
-    final int selectedColor = ref.watch(themeNotifierProvider).selectedColor;
-    final isDarkMode = ref.watch(themeNotifierProvider).isDarkMode;
+    final theme = ref.watch(themeConfigurationProvider);
+
+    ThemeApp currentTheme = theme.when(
+      data: (data) => ThemeApp(
+        isDarkMode: data.isNotEmpty ? data[0].isDarkMode : false,
+        selectedColor: data.isNotEmpty ? data[0].selectedColor : 0,
+      ),
+      error: (error, stackTrace) => throw UnimplementedError(),
+      loading: () => ThemeApp(
+        isDarkMode: false,
+        selectedColor: 0,
+      ),
+    );
+
     return CustomScrollView(
       slivers: [
         const SliverAppBar(
@@ -25,10 +38,20 @@ class ConfigurationView extends ConsumerWidget {
             child: Column(
               children: [
                 IconButton(
-                    onPressed: () {
-                      ref.read(themeNotifierProvider.notifier).changeDarkMode();
+                    onPressed: () async {
+                      currentTheme = currentTheme.copyWith(
+                        isDarkMode: !currentTheme.isDarkMode,
+                        selectedColor: currentTheme.selectedColor,
+                      );
+
+                      await ref
+                          .read(themeNotifierProvider.notifier)
+                          .updateConfiguration(currentTheme);
+                      ref.invalidate(themeConfigurationProvider);
                     },
-                    icon: Icon(isDarkMode ? Icons.light_mode_outlined : Icons.dark_mode_outlined)),
+                    icon: Icon(currentTheme.isDarkMode
+                        ? Icons.light_mode_outlined
+                        : Icons.dark_mode_outlined)),
                 Expanded(
                   flex: 2,
                   child: ListView.builder(
@@ -38,14 +61,22 @@ class ConfigurationView extends ConsumerWidget {
                       return RadioListTile(
                         activeColor: color,
                         value: index,
-                        groupValue: selectedColor,
+                        groupValue: currentTheme.selectedColor,
                         title: Text(
                           AppLocalizations.of(context)!.thisColor,
                           style: TextStyle(color: color),
                         ),
                         subtitle: Text('${color.value}'),
-                        onChanged: (value) {
-                          ref.read(themeNotifierProvider.notifier).changeColor(index);
+                        onChanged: (value) async {
+                          currentTheme = currentTheme.copyWith(
+                            selectedColor: index,
+                            isDarkMode: currentTheme.isDarkMode,
+                          );
+
+                          await ref
+                              .read(themeNotifierProvider.notifier)
+                              .updateConfiguration(currentTheme);
+                          ref.invalidate(themeConfigurationProvider);
                         },
                       );
                     },

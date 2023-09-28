@@ -1,3 +1,6 @@
+import 'package:cinemapp/domain/entities/theme/theme_app.dart';
+import 'package:cinemapp/domain/repositories/local_storage/local_storage_repository.dart';
+import 'package:cinemapp/ui/providers/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cinemapp/config/theme/app_theme.dart';
 
@@ -12,17 +15,24 @@ final selectedColorProvider = StateProvider((ref) => 5);
 
 //Objeto AppTheme
 final themeNotifierProvider = StateNotifierProvider<ThemeNotifier, AppTheme>(
-  (ref) => ThemeNotifier(),
+  (ref) => ThemeNotifier(localStorageRepository: ref.watch(localStorageRepoisitoryProvider)),
 );
 
 class ThemeNotifier extends StateNotifier<AppTheme> {
-  ThemeNotifier() : super(AppTheme());
+  final LocalStorageRepository localStorageRepository;
+  ThemeNotifier({
+    required this.localStorageRepository,
+  }) : super(AppTheme());
 
-  void changeDarkMode() {
-    state = state.copyWith(isDarkMode: !state.isDarkMode);
+  Future<void> updateConfiguration(ThemeApp theme) async {
+    state = state.copyWith(isDarkMode: theme.isDarkMode, selectedColor: theme.selectedColor);
+    await localStorageRepository.setThemeconfiguration(ThemeApp(
+      isDarkMode: state.isDarkMode,
+      selectedColor: state.selectedColor,
+    ));
   }
 
-  void changeColor(int colorIndex) {
-    state = state.copyWith(selectedColor: colorIndex);
+  Future<List<ThemeApp>> getThemeconfiguration() async {
+    return await localStorageRepository.getThemeconfiguration();
   }
 }
