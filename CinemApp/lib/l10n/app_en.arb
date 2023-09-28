@@ -11,5 +11,7 @@
     "whereToWatch": "Where to watch",
     "actors": "Actors",
     "search": "Search",
-    "thisColor": "This color"
+    "thisColor": "This color",
+    "ohNo": "Ohhh No!!",
+    "noFavorites": "You have no favorites"
 }
