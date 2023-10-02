@@ -21,4 +21,9 @@ class TvShowsdbRepositoryImpl extends TvShowsRepository {
   Future<List<Video>> getYoutubeVideosById(int movieId) {
     return tvShowsDatasource.getYoutubeVideosById(movieId);
   }
+
+  @override
+  Future<List<TvShow>> getSimilarShows(int movieId) {
+    return tvShowsDatasource.getSimilarShows(movieId);
+  }
 }

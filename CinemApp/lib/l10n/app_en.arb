@@ -14,5 +14,7 @@
     "thisColor": "This color",
     "ohNo": "Ohhh No!!",
     "noFavorites": "You have no favorites",
-    "premiere": "Premiere: "
+    "premiere": "Premiere: ",
+    "failedLoadSimilar": "Failed to load similar movies",
+    "recommendations": "Recommendations"
 }

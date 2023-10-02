@@ -64,4 +64,10 @@ class TvShowsDatasourceImpl extends TvShowsDatasource {
 
     return videos;
   }
+
+  @override
+  Future<List<TvShow>> getSimilarShows(int movieId) async {
+    final response = await dio.get('/tv/$movieId/similar');
+    return _jsonToMovies(response.data);
+  }
 }

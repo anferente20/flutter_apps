@@ -2,6 +2,7 @@ import 'package:cinemapp/domain/entities/video/video.dart';
 import 'package:cinemapp/ui/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -35,7 +36,10 @@ class VideosFromMovie extends ConsumerWidget {
 
     return moviesFromVideo.when(
       data: (videos) => _VideosList(videos: videos),
-      error: (_, __) => const Center(child: Text('No se pudo cargar películas similares')),
+      error: (_, __) => Center(
+          child: Text(
+        AppLocalizations.of(context)!.failedLoadSimilar,
+      )),
       loading: () => const Center(child: CircularProgressIndicator(strokeWidth: 2)),
     );
   }
@@ -97,7 +101,6 @@ class _YouTubeVideoPlayerState extends State<_YouTubeVideoPlayer> {
     _controller = YoutubePlayerController(
       initialVideoId: widget.youtubeId,
       flags: const YoutubePlayerFlags(
-        hideThumbnail: true,
         showLiveFullscreenButton: false,
         mute: false,
         autoPlay: false,

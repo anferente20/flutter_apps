@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cinemapp/config/helpers/human_formats.dart';
 import 'package:cinemapp/domain/entities/movies/movie.dart';
 import 'package:cinemapp/ui/screens/movies/widgets/actors_by_movie.dart';
+import 'package:cinemapp/ui/screens/movies/widgets/similar_movies.dart';
 import 'package:cinemapp/ui/screens/movies/widgets/streaming_providers_by_movie.dart';
 import 'package:cinemapp/ui/widgets/shared/movies/popularity/popularity.dart';
 import 'package:cinemapp/ui/widgets/videos/video_from_movie.dart';
@@ -99,6 +100,13 @@ class MovieDetails extends StatelessWidget {
           isMovie: isMovie,
         ),
         VideosFromMovie(
+          movieId: movie.id,
+          isMovie: isMovie,
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        SimilarMovies(
           movieId: movie.id,
           isMovie: isMovie,
         ),

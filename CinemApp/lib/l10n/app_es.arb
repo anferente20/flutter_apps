@@ -14,5 +14,7 @@
     "thisColor": "Este color",
     "ohNo": "Ohhh No!!",
     "noFavorites": "No tienes favoritos",
-    "premiere": "Estreno: "
+    "premiere": "Estreno: ",
+    "failedLoadSimilar": "No se pudo cargar películas similares",
+    "recommendations": "Recomendaciones"
 }
