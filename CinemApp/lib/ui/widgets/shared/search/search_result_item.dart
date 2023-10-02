@@ -1,6 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cinemapp/domain/entities/movies/movie.dart';
-import 'package:cinemapp/ui/widgets/shared/movies/popularity/popularity.dart';
+import 'package:cinemapp/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -37,9 +37,11 @@ class SearchResultItem extends StatelessWidget {
             width: size.width * 0.2,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: Image.network(
-                item.posterPath,
-                loadingBuilder: (context, child, loadingProgress) => FadeIn(child: child),
+              child: FadeInImage(
+                height: 220,
+                fit: BoxFit.cover,
+                placeholder: const AssetImage('assets/loaders/bottle-loader.gif'),
+                image: NetworkImage(item.posterPath),
               ),
             ),
           ),
@@ -61,7 +63,7 @@ class SearchResultItem extends StatelessWidget {
                   maxLines: 4,
                   overflow: TextOverflow.fade,
                 ),
-                Poipularity(
+                Popularity(
                   popularity: item.voteAverage,
                 ),
               ],

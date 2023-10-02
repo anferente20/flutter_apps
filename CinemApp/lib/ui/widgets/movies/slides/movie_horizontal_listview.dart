@@ -1,6 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cinemapp/domain/entities/movies/movie.dart';
-import 'package:cinemapp/ui/widgets/shared/movies/popularity/popularity.dart';
+import 'package:cinemapp/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -50,7 +50,7 @@ class _MoviHorizontalListviewState extends State<MoviHorizontalListview> {
       height: 350,
       child: Column(children: [
         if (widget.title != null || widget.subtitle != null)
-          _Title(
+          MovieTitle(
             title: widget.title,
             subtitle: widget.subtitle,
           ),
@@ -70,7 +70,7 @@ class _MoviHorizontalListviewState extends State<MoviHorizontalListview> {
                 }
               },
               child: FadeInRight(
-                child: _SlideMovie(
+                child: MovieSlide(
                   movie: widget.movies[index],
                   showRate: widget.showRate,
                 ),
@@ -79,105 +79,6 @@ class _MoviHorizontalListviewState extends State<MoviHorizontalListview> {
           },
         )),
       ]),
-    );
-  }
-}
-
-class _SlideMovie extends StatelessWidget {
-  final Movie movie;
-  final bool showRate;
-
-  const _SlideMovie({
-    required this.movie,
-    this.showRate = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final textStyles = Theme.of(context).textTheme;
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          //* Image
-          SizedBox(
-            width: 150,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.network(
-                movie.posterPath,
-                fit: BoxFit.cover,
-                width: 150,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress != null) {
-                    return const Center(
-                        child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                    ));
-                  }
-                  return FadeInRight(child: child);
-                },
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          //* Title
-          SizedBox(
-            width: 150,
-            child: Text(
-              movie.title,
-              maxLines: 2,
-              style: textStyles.titleSmall,
-            ),
-          ),
-          //* rated
-          Visibility(
-            visible: showRate,
-            child: Poipularity(
-              popularity: movie.voteAverage,
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class _Title extends StatelessWidget {
-  const _Title({
-    this.title,
-    this.subtitle,
-  });
-
-  final String? title;
-  final String? subtitle;
-
-  @override
-  Widget build(BuildContext context) {
-    final titleStyle = Theme.of(context).textTheme.titleLarge;
-
-    return Container(
-      padding: const EdgeInsets.only(top: 10),
-      margin: const EdgeInsets.symmetric(horizontal: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          if (title != null)
-            Text(
-              title!,
-              style: titleStyle,
-            ),
-          if (subtitle != null)
-            FilledButton.tonal(
-              style: const ButtonStyle(visualDensity: VisualDensity.compact),
-              onPressed: () {},
-              child: Text(subtitle!),
-            )
-        ],
-      ),
     );
   }
 }

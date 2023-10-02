@@ -1,8 +1,8 @@
 import 'package:cinemapp/config/helpers/human_formats.dart';
 import 'package:flutter/material.dart';
 
-class Poipularity extends StatelessWidget {
-  const Poipularity({
+class Popularity extends StatelessWidget {
+  const Popularity({
     super.key,
     required this.popularity,
   });

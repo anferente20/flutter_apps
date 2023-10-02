@@ -58,13 +58,11 @@ class _CustomSliverAppbarState extends ConsumerState<CustomSliverAppbar> {
         background: Stack(
           children: [
             SizedBox.expand(
-              child: Image.network(
-                widget.movie.posterPath,
+              child: FadeInImage(
+                height: 220,
                 fit: BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress != null) return const SizedBox();
-                  return FadeIn(child: child);
-                },
+                placeholder: const AssetImage('assets/loaders/bottle-loader.gif'),
+                image: NetworkImage(widget.movie.posterPath),
               ),
             ),
             const CustomGradient(

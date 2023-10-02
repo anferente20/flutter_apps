@@ -54,15 +54,11 @@ class _Slide extends StatelessWidget {
           onTap: () => context.push('/movie/${movie.id}'),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
-            child: Image.network(
-              movie.backdropPath,
+            child: FadeInImage(
+              height: 220,
               fit: BoxFit.cover,
-              loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress != null) {
-                  return const DecoratedBox(decoration: BoxDecoration(color: Colors.black12));
-                }
-                return FadeIn(child: child);
-              },
+              placeholder: const AssetImage('assets/loaders/bottle-loader.gif'),
+              image: NetworkImage(movie.backdropPath),
             ),
           ),
         ),

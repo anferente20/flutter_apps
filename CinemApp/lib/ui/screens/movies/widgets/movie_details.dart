@@ -23,9 +23,11 @@ class MovieDetails extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.network(
-                  movie.posterPath,
-                  width: size.width * 0.3,
+                child: FadeInImage(
+                  height: 220,
+                  fit: BoxFit.cover,
+                  placeholder: const AssetImage('assets/loaders/bottle-loader.gif'),
+                  image: NetworkImage(movie.posterPath),
                 ),
               ),
               const SizedBox(
