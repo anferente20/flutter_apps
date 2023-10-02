@@ -7,4 +7,9 @@ class HumanFormats {
 
     return formatNumber.format(number);
   }
+
+  static String shortDate(DateTime date, String locale) {
+    final format = DateFormat.yMMMEd(locale);
+    return format.format(date);
+  }
 }

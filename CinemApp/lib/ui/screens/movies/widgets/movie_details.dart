@@ -1,7 +1,13 @@
+import 'dart:io';
+
+import 'package:cinemapp/config/helpers/human_formats.dart';
 import 'package:cinemapp/domain/entities/movies/movie.dart';
 import 'package:cinemapp/ui/screens/movies/widgets/actors_by_movie.dart';
 import 'package:cinemapp/ui/screens/movies/widgets/streaming_providers_by_movie.dart';
+import 'package:cinemapp/ui/widgets/shared/movies/popularity/popularity.dart';
+import 'package:cinemapp/ui/widgets/videos/video_from_movie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MovieDetails extends StatelessWidget {
   const MovieDetails({super.key, required this.movie, this.isMovie = true});
@@ -25,6 +31,7 @@ class MovieDetails extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 child: FadeInImage(
                   height: 220,
+                  width: size.width * 0.3,
                   fit: BoxFit.cover,
                   placeholder: const AssetImage('assets/loaders/bottle-loader.gif'),
                   image: NetworkImage(movie.posterPath),
@@ -34,7 +41,7 @@ class MovieDetails extends StatelessWidget {
                 width: 10,
               ),
               SizedBox(
-                width: size.width * 0.7 - 40,
+                width: size.width * 0.7 - 50,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -46,6 +53,18 @@ class MovieDetails extends StatelessWidget {
                       movie.overview,
                       textAlign: TextAlign.justify,
                     ),
+                    const SizedBox(height: 10),
+                    Popularity(popularity: movie.voteAverage),
+                    Row(
+                      children: [
+                        Text(
+                          AppLocalizations.of(context)!.premiere,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(width: 5),
+                        Text(HumanFormats.shortDate(movie.releaseDate, Platform.localeName))
+                      ],
+                    )
                   ],
                 ),
               )
@@ -77,6 +96,10 @@ class MovieDetails extends StatelessWidget {
         ),
         StreamingProvidersByMovie(
           movieID: movie.id,
+          isMovie: isMovie,
+        ),
+        VideosFromMovie(
+          movieId: movie.id,
           isMovie: isMovie,
         ),
         const SizedBox(

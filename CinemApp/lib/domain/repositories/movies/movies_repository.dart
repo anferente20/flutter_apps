@@ -1,4 +1,5 @@
 import 'package:cinemapp/domain/entities/movies/movie.dart';
+import 'package:cinemapp/domain/entities/video/video.dart';
 
 abstract class MoviesRepository {
   //* List of movies
@@ -9,4 +10,5 @@ abstract class MoviesRepository {
 
   //* Single Movie
   Future<Movie> getMovieByID(String id);
+  Future<List<Video>> getYoutubeVideosById(int movieId);
 }

@@ -1,7 +1,7 @@
 import 'package:cinemapp/config/constants/environment.dart';
 import 'package:cinemapp/domain/datasources/streaming_provider/provider_datasource.dart';
 import 'package:cinemapp/domain/entities/streaming_providers/streaming_provider.dart';
-import 'package:cinemapp/infrastructure/mappers/streaming_provider_mapper.dart';
+import 'package:cinemapp/infrastructure/mappers/streaming_provider/streaming_provider_mapper.dart';
 import 'package:cinemapp/infrastructure/models/moviedb/streaming_provider/streaming_provider_response.dart';
 import 'package:devicelocale/devicelocale.dart';
 import 'package:dio/dio.dart';

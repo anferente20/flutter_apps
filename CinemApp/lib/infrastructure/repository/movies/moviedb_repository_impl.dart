@@ -1,5 +1,6 @@
 import 'package:cinemapp/domain/datasources/movies/movies_datasource.dart';
 import 'package:cinemapp/domain/entities/movies/movie.dart';
+import 'package:cinemapp/domain/entities/video/video.dart';
 import 'package:cinemapp/domain/repositories/movies/movies_repository.dart';
 
 class MoviedbRepositoryImpl extends MoviesRepository {
@@ -31,5 +32,10 @@ class MoviedbRepositoryImpl extends MoviesRepository {
   @override
   Future<Movie> getMovieByID(String id) {
     return moviesDatasource.getMovieByID(id);
+  }
+
+  @override
+  Future<List<Video>> getYoutubeVideosById(int movieId) {
+    return moviesDatasource.getYoutubeVideosById(movieId);
   }
 }
