@@ -11,7 +11,7 @@ class FavoritesView extends ConsumerStatefulWidget {
   ConsumerState<FavoritesView> createState() => _FavoritesViewState();
 }
 
-class _FavoritesViewState extends ConsumerState<FavoritesView> {
+class _FavoritesViewState extends ConsumerState<FavoritesView> with AutomaticKeepAliveClientMixin {
   bool isLastPage = false;
   bool isLoading = false;
 
@@ -30,7 +30,11 @@ class _FavoritesViewState extends ConsumerState<FavoritesView> {
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     final favorites = ref.watch(favoritesMoviesProvider).values.toList();
     final color = Theme.of(context).colorScheme.primary;
     return Scaffold(
@@ -51,7 +55,7 @@ class _FavoritesViewState extends ConsumerState<FavoritesView> {
                     ),
                     Text(
                       AppLocalizations.of(context)!.noFavorites,
-                      style: const TextStyle(fontSize: 20, color: Colors.black45),
+                      style: TextStyle(fontSize: 20, color: color),
                     ),
                   ],
                 ),

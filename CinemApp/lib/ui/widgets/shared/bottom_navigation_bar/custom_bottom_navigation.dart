@@ -26,10 +26,6 @@ class CustomBottomNavigationBar extends StatelessWidget {
           label: AppLocalizations.of(context)!.home,
         ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.label_outlined),
-          label: AppLocalizations.of(context)!.categories,
-        ),
-        BottomNavigationBarItem(
           icon: const Icon(Icons.favorite_outline),
           label: AppLocalizations.of(context)!.favorites,
         ),

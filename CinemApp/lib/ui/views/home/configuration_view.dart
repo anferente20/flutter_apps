@@ -5,11 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ConfigurationView extends ConsumerWidget {
+class ConfigurationView extends ConsumerStatefulWidget {
   const ConfigurationView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConfigurationView> createState() => _ConfigurationViewState();
+}
+
+class _ConfigurationViewState extends ConsumerState<ConfigurationView>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
     final List<Color> colors = ref.watch(colorThemProvider);
     final theme = ref.watch(themeConfigurationProvider);
 
