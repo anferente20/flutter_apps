@@ -35,7 +35,7 @@ class CustomTextFormField extends StatelessWidget {
         prefixIcon: icon != null
             ? Icon(
                 icon,
-                color: colors.primary,
+                color: errorMessage != null ? colors.error : colors.primary,
               )
             : null,
         enabledBorder: border,
