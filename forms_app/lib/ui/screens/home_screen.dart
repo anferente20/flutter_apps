@@ -20,6 +20,12 @@ class HomeScreen extends StatelessWidget {
             subtitle: const Text('Gestor de estado complejo'),
             trailing: const Icon(Icons.arrow_forward_ios_outlined),
             onTap: () => context.push('/bloc'),
+          ),
+          ListTile(
+            title: const Text('New user form'),
+            subtitle: const Text('Formulario para nuevos usuarios'),
+            trailing: const Icon(Icons.arrow_forward_ios_outlined),
+            onTap: () => context.push('/new-user-form'),
           )
         ],
       ),
